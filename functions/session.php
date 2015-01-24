@@ -46,6 +46,8 @@
 					$count_roles++;
 				}
 				
+				$update_tbluser_lastlogin = "UPDATE tbl_users SET last_login_date=NOW() WHERE id_user=".$_SESSION['USERID'];
+				$result_update_tbluser_lastlogin = $connection->query($update_tbluser_lastlogin);
 			}
 			else
 			{
