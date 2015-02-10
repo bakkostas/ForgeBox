@@ -78,9 +78,8 @@
 			<div id="CourseViewMenu"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>">Full Height</a>&nbsp;|&nbsp;
 						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=twocol">Two columns</a>&nbsp;|&nbsp;
-						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>
-						<i class="icon-fullscreen-alt" data-hint="Show Full Screen" onclick="reloadFullscreen();"></i>
-					
+						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;|&nbsp;
+						<a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET["preview"])){ if($_GET["preview"]=="twocol"){echo "&preview=twocol&noheaders=1";}if($_GET["preview"]=="section"){echo "&preview=section&noheaders=1";}}else{echo "&noheaders=1";}?>" onclick=""><i class="glyphicon glyphicon-fullscreen" ></i></a>
 			</div>
 		<?php	
 		}
@@ -92,12 +91,17 @@
 			if($_GET['preview']=="twocol")
 			{    
     
-				echo '<div id="twocols" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 200px;">';
-		
+				echo '<div id="twocols" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 400px;">';
+				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
+				{
+					?>
+					<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>;
+					<?php
+				}
 				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px; height: inherit;"  > ';
 				echo "<div style=\"height:inherit; overflow:scroll;\">";
 				
-				printCoursePart($connection, $_GET['course_id']); //printModule Content in left part column
+				printCoursePart($connection, $_GET['course_id'],"twocol", 0); //printModule Content in left part column
 				
 				for($i=0; $i<$count_list;$i++)
 				{
@@ -133,7 +137,12 @@
 			{ 
 				
 				echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >';
-		
+				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
+				{
+					?>
+					<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>;
+					<?php
+				}
 				echo "<div class=\"tab-control\" data-role=\"tab-control\">";
 				echo "<ul id=\"myTab\" class=\"nav nav-tabs\">";
 				//$count_pres=0;
@@ -214,6 +223,12 @@
 		}
 		else
 		{
+			if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
+				{
+					?>
+					<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>;
+					<?php
+				}
 			printCoursePart($connection, $_GET['course_id']);
 
 			for($i=0; $i<$count_list;$i++)
@@ -236,6 +251,7 @@
 		?>
 	</div> <!-- div   itemtype= http://schema.org/CreativeWork    -->
 </div><!--  ------------------------  END CONTENT      ------------------------      -->
+<div class="row">
 <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -249,6 +265,9 @@
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
 <?php include "footer.php"; ?>
 
 
@@ -264,22 +283,35 @@ $('#myTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 })
-	
-var reloadFullscreen = function (object){
-	window.location = document.URL + '&noheaders=1';
-}	
 
+function reloadFullscreen(){
+	
+	window.location = document.URL + '&noheaders=1';
+}
+/*var reloadFullscreen = function (object){
+	window.location = document.URL + '&noheaders=1';
+}*/	
+
+function showFullScreen() {
+	$('#CourseViewMenu').hide();
+	$('#FORGETitleWindow').hide();
+	$('#FORGEBoxHeaderMenu').hide();
+	$('#FORGEBoxHeaderMenuLogo').hide();
+	$('#footer').hide();
+	$('#disqus_thread').hide();
+	$('#CourseContentRow').css({ left: 10, right:10, position:'absolute'});
+}
+/*
 var showFullScreen = function (object){
 	$('#CourseViewMenu').hide();
 	$('#FORGETitleWindow').hide();
 	$('#FORGEBoxHeaderMenu').hide();
 	$('#FORGEBoxHeaderMenuLogo').hide();
 	$('#footer').hide();
+	$('#disqus_thread').hide();
 	$('#CourseContentRow').css({ left: 10, right:10, position:'absolute'});
-}
-
-
-var twoSectionsDiv = function (object) {
+}*/
+function twoSectionsDiv() {
 		if ($('#footer').is(':visible') ){
 			$('#twocols').height($(window).height() - $('#footer').height() - $('#twocols').offset().top-100 );
 		}else{
@@ -287,12 +319,25 @@ var twoSectionsDiv = function (object) {
 			$('#twocols').height($(window).height()  - $('#twocols').offset().top );
 		}
 	}
+/*
+var twoSectionsDiv = function (object) {
+		if ($('#footer').is(':visible') ){
+			$('#twocols').height($(window).height() - $('#footer').height() - $('#twocols').offset().top-100 );
+		}else{
+		
+			$('#twocols').height($(window).height()  - $('#twocols').offset().top );
+		}
+	}*/
 $(window).ready(function () {
 
 
-	<?php if(isset($_GET['noheaders'])){ //trick to Hide header and all to show the course clear for embedded usage in other pages
+	<?php if(isset($_GET['noheaders']) && $_GET['noheaders']==1){ //trick to Hide header and all to show the course clear for embedded usage in other pages
 	?>showFullScreen();
-	<?php } //if....?>
+	<?php }
+	else {
+		return_screen();
+	}
+	//if....?>
 	
 	if ($('#twocols').length ){
 		twoSectionsDiv($('#twocols'));		
@@ -303,7 +348,7 @@ $(window).bind("resize", function () {
 	if ($('#twocols').length){
 		twoSectionsDiv($('#twocols'));
 	}
-});		
+});	
 		
 	 $('#lrmi_popup').popover({ html : true });
 	
@@ -317,6 +362,16 @@ $(window).bind("resize", function () {
     });
 });
 
+function return_screen(){
+	$('#CourseViewMenu').show();
+	$('#FORGETitleWindow').show();
+	$('#FORGEBoxHeaderMenu').show();
+	$('#FORGEBoxHeaderMenuLogo').show();
+	$('#footer').show();
+	$('#disqus_thread').show();
+	//$('#CourseContentRow').css({ left: 10, right:10, position:'absolute'});
+	twoSectionsDiv();
+}
 </script>
 
 <style>

@@ -127,7 +127,7 @@
 								<a href="http://www.ict-fire.eu/" target="_blank"><img src="images/FIRE-logo.png"/></a>
 							</div>
 							<div class="col-sm-12">Running FORGEBox <?php include('version.txt');?> | <a href="terms.php" >Terms and Conditions</a> | 
-							&copy; 2014 <a target="_blank" href="http://www.forgebox.eu/" title="www.forgebox.eu">forgebox.eu</a> on behalf of the <a target="_blank" href="http://www.ict-forge.eu/" title="http://www.ict-forge.eu/">FORGE</a> consortium | <a href="course_rss_feed.php" target="_blank"><i class="fa fa-rss">&nbsp;RSS Feed</i></a>
+							&copy; 2014 <a target="_blank" href="http://www.forgebox.eu/" title="www.forgebox.eu">forgebox.eu</a> on behalf of the <a target="_blank" href="http://www.ict-forge.eu/" title="http://www.ict-forge.eu/">FORGE</a> consortium | <a href="course_rss_feed.php" target="_blank"><i class="fa fa-rss">&nbsp;RSS Feed</i></a> | <a href="all_forge_courses.php" target="_blank">&nbsp;See all Courses</i></a>
 							</div>  
 							
 					</div>

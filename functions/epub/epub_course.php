@@ -4,7 +4,7 @@ ini_set('error_reporting', E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 
 include "../conf.php";	
-
+$count_list=0;
 if(isset($_GET['course_id']))
 	{
 		$query_select= "SELECT id,title,author,publisher,sdescription,content FROM tbl_courses WHERE tbl_courses.id = ".$_GET['course_id'];
@@ -21,6 +21,7 @@ if(isset($_GET['course_id']))
 		}
 		
 		$query_select_list = "SELECT id, presentation_id, interactive_id FROM tbl_match_present_interact_course WHERE course_id=".$_GET['course_id']." ORDER BY order_list ASC";
+		
 		$result_select_list = $connection->query($query_select_list)  or die("Error in query.." . mysqli_error($connection));
 		if(strlen($content)>15)
 		{
@@ -149,6 +150,7 @@ $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
 					while($row = $result_select_present->fetch_array()){
 						$title_part[$count_i] = $row[0];
 						$chapter[$count_i] = $content_start . '<h1>'.$row[0].'</h1><br />'.html_entity_decode(htmlentities(str_replace("<br>","<br />",utf8_encode($row[1])))).'<br /><br /><br />'.$bookEnd;
+						
 					}
 				}
 				else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
@@ -159,7 +161,15 @@ $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
 			
 					while($row2 = $result_select_present->fetch_array()){
 						$title_part[$count_i] = $row2[0];
-						$chapter[$count_i] = $content_start . '<h1>'.$row2[0].'</h1><p>'.html_entity_decode(htmlentities($row2[2])).'</p><iframe sandbox="allow-same-origin allow-forms allow-scripts" style="border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;" height="450px" width="100%" scrolling="auto" src="'.html_entity_decode($row2[1]).'"></iframe><br /><br /><a href="'.html_entity_decode(htmlentities($row2[1])).'" target="_blank" style="font-size:20px;">'.html_entity_decode(htmlentities($row2[1])).'</a><br /><br />'.$bookEnd;
+						if(!empty($row2[2]))
+						{
+							$chapter[$count_i] = $content_start . '<h1>'.$row2[0].'</h1><iframe sandbox="allow-same-origin allow-forms allow-scripts" style="border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;" height="450px" width="100%" scrolling="auto" src="'.html_entity_decode($row2[1]).'"></iframe><br /><br /><a href="'.html_entity_decode(htmlentities($row2[1])).'" target="_blank" style="font-size:20px;">'.html_entity_decode(htmlentities($row2[1])).'</a><br /><br />'.$bookEnd;
+						}
+						else
+						{
+							$chapter[$count_i] = $content_start . '<h1>'.$row2[0].'</h1><p>'.html_entity_decode(htmlentities($row2[2])).'</p><iframe sandbox="allow-same-origin allow-forms allow-scripts" style="border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;" height="450px" width="100%" scrolling="auto" src="'.html_entity_decode($row2[1]).'"></iframe><br /><br /><a href="'.html_entity_decode(htmlentities($row2[1])).'" target="_blank" style="font-size:20px;">'.html_entity_decode(htmlentities($row2[1])).'</a><br /><br />'.$bookEnd;
+						}
+						
 					}
 				}
 			}
@@ -178,6 +188,7 @@ $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
 			$chapter_html =  "Chapter001.html";
 			$book->addChapter($chapter_num_title, $chapter_html, $chapter[1] , false, EPub::EXTERNAL_REF_ADD);
 		$count_i=1;
+		$count_list = $count_list-1;
 		}
 		else
 		{
@@ -187,14 +198,18 @@ $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
 		//$count_i=0;
 		for($i=0; $i<$count_list;$i++)
 		{
+			
 			$count_i++;
 			$addchapter = "Add Chapter ".$count_i;
 			$log->logLine($addchapter);
 			//$Chapters='$chapter'.$count_i;
 			$chapter_num_title = "Chapter ".$count_i.":".$title_part[$count_i];
 			$chapter_html =  "Chapter00".$count_i.".html";
-			$book->addChapter($chapter_num_title, $chapter_html, $chapter[$count_i] , false, EPub::EXTERNAL_REF_ADD);
+			
+			$book->addChapter($chapter_num_title, $chapter_html, $chapter[$count_i] , false, EPub::EXTERNAL_REF_ADD);			
+			
 		}
+		
 		$backcover = $content_start . "<img src=\"images/back-cover-image.jpg\"/>" . $bookEnd;
 		$book->addChapter("LastPage", "last_page.html", $backcover);
 /*

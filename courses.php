@@ -818,7 +818,7 @@
 						{
 							document.getElementById('generate_epub_file_spin').innerHTML='';
 							document.getElementById('generate_epub_file').style.display = 'block';
-							
+							//alert(msg.txt);
 						}
 						//alert(msg.txt);
 					}							

@@ -360,6 +360,7 @@ class Zip {
         $this->streamFile = tempnam(sys_get_temp_dir(), 'Zip');
         $this->streamData = fopen($this->streamFile, "wb");
         $this->streamFilePath = $filePath;
+		//$this->streamFilePath = str_replace(,"/%20","/",str_replace("%20/", "/", $filePath));		
         $this->streamTimestamp = $timestamp;
         $this->streamFileComment = $fileComment;
         $this->streamFileLength = 0;
