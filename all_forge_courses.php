@@ -31,14 +31,15 @@
 	
 	<div class="container">
 		<h1>See All Forgebox Course</h1>
-			<a href="all_forge_courses_to_pdf.php">Export to PDF</a>
+		<a href="all_forge_courses_to_pdf.php" style="float:right;"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Export to PDF</a>
+			
 			<?php 				
 				for($i=0;$i<$count_rec;$i++) {
 					
 				?>
 				<div class="row">					
 					<div class="col-md-2">
-						<img src="images/course_smallico.PNG"/>
+						<img src="images/course_smallico.PNG" width="100" />
 					</div>
 					<div class="col-md-10">
 						<div style="padding-left:0px;"><h3><a href="preview_course.php?course_id=<?php echo $id[$i]; ?>"><?php echo $title[$i]; ?></a></h3></div>
