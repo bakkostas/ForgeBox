@@ -59,7 +59,7 @@ include "functions/functions.php";
  ?>
 	
 	<div class="container">
-		<h1>See All Forgebox Course</h1>
+		<h1>All Forgebox Courses</h1>
 			<?php 				
 				for($i=0;$i<$count_rec;$i++) {
 					
@@ -72,7 +72,7 @@ include "functions/functions.php";
 						<?php echo "<b>Publisher :</b> &nbsp;&nbsp;".$publisher[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?>
 						<?php echo "<b>Author : </b>&nbsp;&nbsp;".$author[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?><br />
 						<?php echo "<b>Created Date :</b> &nbsp;&nbsp;".date('d-m-Y', strtotime($create_date[$i]))."&nbsp;&nbsp;&nbsp;"; ?>
-						<a class="btn btn-default" href="http://localhost/forgebox/preview_course.php?course_id=<?php echo $id; ?>">See More</a>
+						<a class="btn btn-default" href="preview_course.php?course_id=<?php echo $id; ?>">See More</a>
 					</td>
 					</tr>
 				</table>					
