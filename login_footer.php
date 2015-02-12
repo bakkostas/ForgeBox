@@ -48,6 +48,12 @@
 							<div class="col-md-4"><a href="#" style="color:#FFFFFF;"><i class="fa fa-google-plus-square fg-white" style="font-size:32px;"></i> Google Plus</a></div>
 							<div class="col-md-4"><a href="#" style="color:#FFFFFF;"><i class="fa fa-youtube fg-white" style="font-size:32px;"></i> Youtube</a></div>
 						</div>
+						<div class="col-md-12" style="margin-left:0px;">
+						&nbsp;
+						</div>
+						<div class="col-md-12" style="margin-left:0px;">
+							<div class="col-md-4"><a href="http://www.slideshare.net/ICT-FORGE" style="color:#FFFFFF;"><img src="http://public.slidesharecdn.com/b/images/mobile_app_promo/ios_icon.png" width="32"><!-- <i class="fa fa-slideshare fg-white" style="font-size:32px;"></i> --> Slideshare</a></div>
+						</div>
 					</div>
 				</div>
 			</div>
