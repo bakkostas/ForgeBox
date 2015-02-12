@@ -61,18 +61,21 @@ include "functions/functions.php";
 	<div class="container">
 		<h1>All Forgebox Courses</h1>
 			<?php 				
+				$my_folder=explode("/",$_SERVER[REQUEST_URI]);
+				
+				
 				for($i=0;$i<$count_rec;$i++) {
 					
 				?>
 				<table  width="500">
 					<tr>
 						<td width="150"><img src="images/course_smallico.PNG"/></td>
-						<td width="550"><div><h3><a href="preview_course.php?course_id=<?php echo $id[$i]; ?>"><?php echo $title[$i]; ?></a></h3></div>
+						<td width="550"><div><h3><a href="<?php echo "http://".$_SERVER[HTTP_HOST]."/".$my_folder[1]; ?>/preview_course.php?course_id=<?php echo $id[$i]; ?>"><?php echo $title[$i]; ?></a></h3></div>
 						<?php echo $sdescription[$i]; ?>	<br /><br />
 						<?php echo "<b>Publisher :</b> &nbsp;&nbsp;".$publisher[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?>
 						<?php echo "<b>Author : </b>&nbsp;&nbsp;".$author[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?><br />
 						<?php echo "<b>Created Date :</b> &nbsp;&nbsp;".date('d-m-Y', strtotime($create_date[$i]))."&nbsp;&nbsp;&nbsp;"; ?>
-						<a class="btn btn-default" href="preview_course.php?course_id=<?php echo $id; ?>">See More</a>
+						<a class="btn btn-default" href="<?php echo "http://".$_SERVER[HTTP_HOST]."/".$my_folder[1]; ?>/preview_course.php?course_id=<?php echo $id; ?>">See More</a>
 					</td>
 					</tr>
 				</table>					
