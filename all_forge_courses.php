@@ -30,7 +30,7 @@
  ?>
 	
 	<div class="container">
-		<h1>See All Forgebox Course</h1>
+		<h1>All Forgebox Courses</h1>
 		<a href="all_forge_courses_to_pdf.php" style="float:right;"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Export to PDF</a>
 			
 			<?php 				
