@@ -36,12 +36,23 @@
 		for($i=0;$i<$count_rec;$i++)
 		{
 			$count_epub=0;
-			$query_course_epub = "SELECT * FROM store_scorm_epub WHERE course_id=".$id[$i]." AND has_epub=1";		
+			$count_scorm=0;
+			$query_course_epub = "SELECT has_epub, has_scorm FROM store_scorm_epub WHERE course_id=".$id[$i]." AND has_epub=1";		
 			$result_course_epub= $connection->query($query_course_epub);
 			while($row1 = $result_course_epub->fetch_row()) 
 			{
-				$count_epub++;
+				if($row1[0]==1)
+				{
+					$count_epub++;
+				}
+				if($row1[1]==1)
+				{
+					$count_scorm++;
+				}
 			}
+			
+
+			
 		?>
 		<item>
 		<title><?php echo $title[$i]; ?></title> 	                        
@@ -50,6 +61,7 @@
 		<description><?php echo $sdescription[$i]; ?></description>
 		<link><?php echo $url_host."preview_course.php?course_id=".$id[$i]; ?></link>
 		<epub_link><?php if($count_epub>0){ echo $url_host."attachments/epub_files/".$id[$i]."/".$id[$i].".epub"; } else {echo "NA";}?></epub_link>
+		<scorm_link><?php if($count_scorm>0){ echo $url_host."attachments/scorm_files/".$id[$i]."/".$id[$i].".zip"; } else {echo "NA";}?></scorm_link>
 		</item>
 		<?php
 		}
