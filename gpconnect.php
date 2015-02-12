@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include "functions/session.php";
 include "functions/conf.php";
 
+
 set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ .'/vendor/google/apiclient/src');
 require_once 'Google/Client.php';
 //require_once 'Google/Service/Plus.php';
