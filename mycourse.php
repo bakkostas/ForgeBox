@@ -92,8 +92,20 @@
 					<br />
 					<?php
 						$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5; height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\">Preview</td><td class=\"sort\">Parts</td><td class=\"sort\">Action</td></tr><tbody class=\"list\">";
-		
-						$query_select_mycourse= "SELECT id, title, sdescription FROM tbl_courses WHERE create_uid=".$_SESSION['USERID']." AND course_item_id=1 GROUP BY title";
+						if(isset($_SESSION['UROLE_ID']))
+						{
+							if($_SESSION['UROLE_ID']==1)
+							{
+								$where_case ="";
+							}
+							else if($_SESSION['UROLE_ID']>1 && $_SESSION['UROLE_ID']<7)
+							{
+								$where_case = "create_uid=".$_SESSION['USERID']." AND";
+							}
+							
+						}
+						
+						$query_select_mycourse= "SELECT id, title, sdescription FROM tbl_courses WHERE ".$where_case."  course_item_id=1 GROUP BY title";						
 						$result_select_mycourse = $connection->query($query_select_mycourse);
 		
 						while($row = $result_select_mycourse->fetch_array()){
