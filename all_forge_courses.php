@@ -47,7 +47,7 @@
 						<?php echo "<div style=\"float:left; padding-right:10px; width:auto;\"><i class=\"fa fa-university \" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Publisher\"></i>&nbsp;&nbsp;".$publisher[$i]."</div>"; ?>
 						<?php echo "<div style=\"float:left; padding-right:10px; width:auto;\"><i class=\"fa fa-user\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Author\"></i>&nbsp;&nbsp;".$author[$i]."</div>"; ?>
 						<?php echo "<div style=\"float:left; padding-right:10px; width:auto;\"><i class=\"fa fa-calendar\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Created Date\"></i>&nbsp;&nbsp;".date('d-m-Y', strtotime($create_date[$i]))."</div>"; ?>
-						<div style="float:right; padding-right:10px; width:auto;"><a class="btn btn-default" href="http://localhost/forgebox/preview_course.php?course_id=<?php echo $id[$i]; ?>">See More</a></div>
+						<div style="float:right; padding-right:10px; width:auto;"><a class="btn btn-default" href="preview_course.php?course_id=<?php echo $id[$i]; ?>">See More</a></div>
 					</div>
 				</div>
 				<hr />
