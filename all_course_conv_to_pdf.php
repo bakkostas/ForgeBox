@@ -75,7 +75,7 @@ include "functions/functions.php";
 						<?php echo "<b>Publisher :</b> &nbsp;&nbsp;".$publisher[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?>
 						<?php echo "<b>Author : </b>&nbsp;&nbsp;".$author[$i]."&nbsp;&nbsp;&nbsp;&nbsp;"; ?><br />
 						<?php echo "<b>Created Date :</b> &nbsp;&nbsp;".date('d-m-Y', strtotime($create_date[$i]))."&nbsp;&nbsp;&nbsp;"; ?>
-						<a class="btn btn-default" href="<?php echo "http://".$_SERVER[HTTP_HOST]."/".$my_folder[1]; ?>/preview_course.php?course_id=<?php echo $id; ?>">See More</a>
+						<a class="btn btn-default" href="<?php echo "http://".$_SERVER[HTTP_HOST]."/".$my_folder[1]; ?>/preview_course.php?course_id=<?php echo $id[$i]; ?>">See More</a>
 					</td>
 					</tr>
 				</table>					
