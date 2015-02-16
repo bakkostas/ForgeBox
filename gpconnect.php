@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include "functions/session.php";
 include "functions/conf.php";
 
+
 set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ .'/vendor/google/apiclient/src');
 require_once 'Google/Client.php';
 //require_once 'Google/Service/Plus.php';
@@ -114,7 +115,7 @@ function registerUser($connection, $email, $fname, $lname, $picture){
 		
 	}else{
 		$obj = mysqli_fetch_object($result);
-		$query_update = "UPDATE `forgeboxdb_staging`.`tbl_users` SET `name_user` = '".$fname."', `surname_user` = '".$lname."', `avatar_name` = '".$picture."',`last_login_date` =  now()  WHERE `tbl_users`.`id_user` =".$obj->id_user;	
+		$query_update = "UPDATE `tbl_users` SET `name_user` = '".$fname."', `surname_user` = '".$lname."', `avatar_name` = '".$picture."',`last_login_date` =  now()  WHERE `tbl_users`.`id_user` =".$obj->id_user;	
 		$result_upd = $connection->query($query_update)  or die("Error in query.." . mysqli_error($connection));
 	}
 
