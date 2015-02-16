@@ -176,7 +176,17 @@
 	
 	if(isset($_GET['id']))
 	{
-		$query_select_mycourse= "SELECT title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous, create_uid,interactive_category,interactive_item,interactive_url FROM tbl_courses WHERE id =".$_GET['id']." AND create_uid=".$_SESSION['USERID'];
+		$query_select ='';
+		if($_SESSION["UROLE_ID"]==1)
+		{
+			$query_select = '';
+		}
+		else 
+		{
+			$query_select = " AND create_uid=".$_SESSION['USERID'];
+		}
+			
+		$query_select_mycourse= "SELECT title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous, create_uid,interactive_category,interactive_item,interactive_url FROM tbl_courses WHERE id =".$_GET['id'].$query_select;
 		$result_select_mycourse = $connection->query($query_select_mycourse);
 		
 		if($result_select_mycourse->num_rows == 0)

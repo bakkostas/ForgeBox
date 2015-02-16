@@ -2,7 +2,6 @@
 	include "conf.php";
 	
 	// we check if everything is filled in
-	
 	if(empty($_POST['fname']) || empty($_POST['lname']) || empty($_POST['uemail']) || empty($_POST['pass']))
 	{
 		die(msg(0,"All the fields are required!"));		
