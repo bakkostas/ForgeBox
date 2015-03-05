@@ -51,7 +51,8 @@
 				</div>								
 				<br />				
 				<input type="hidden" name="user_active" id="user_active" value="<?php echo mt_rand();?>" />
-				<input type="submit" id="submit" value="Submit"></input> or <a href="index.php">Sign in to ForgeBox</a>	<br />
+				<!-- <input type="submit" id="submit" value="Submit"></input> -->
+				<a href="#" class="btn btn-default" type="submit" onclick="register(); return false;">Submit</a>&nbsp; &nbsp; or &nbsp; <a href="index.php">Sign in to ForgeBox</a>	<br />
 				<img id="loading" src="images/ajax-loader.gif" alt="working.." />
 			</form>
 			<?php
@@ -92,7 +93,7 @@
 				hideshow('loading',0);
 				
 				$(document).ready(function(){
-					$('#regForm').submit(function(e) {						
+					$('#regForm').submit(function(e) {				
 						register();
 						e.preventDefault();		
 					});

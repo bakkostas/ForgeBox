@@ -137,6 +137,56 @@ while($row = $result_select_repository->fetch_array())
 	<br>
 	
 	
+	<?php
+		
+		
+		if(isset($_GET["rep_id"]) && $_GET["rep_id"]==1)
+		{
+			//$all_widgets ='<div class="container"><div class="col-md-12">';
+			
+			$json = file_get_contents('http://www.forgestore.eu:8080/fsapi/services/api/repo/widgets/');
+			$obj = json_decode($json);
+			
+			for($i=0;$i<count($obj);$i++)
+			{				
+				$all_widgets .='<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="height:300px;">';
+				$all_widgets .='<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">';
+				$all_widgets .=	$obj[$i]->name;
+				$all_widgets .='<p><small class="ng-binding">by admin, University of Patras</small></p>';
+				$all_widgets .='</div>';
+				$all_widgets .='<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><img src="'.$obj[$i]->iconsrc.'" width="100%" />';
+				$all_widgets .='</div>';
+				$all_widgets .='<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">';						
+				$all_widgets .='<small class="ng-binding">Version: '.$obj[$i]->version.'</small>';
+				$all_widgets .='<br>';
+				$all_widgets .='<small>';
+				$my_categories = $obj[$i]->categories;
+				for($j=0;$j<count($my_categories);$j++)
+				{
+					$all_widgets .='<span ng-repeat="wcat in widget.categories" class="ng-scope"><span class="label label-info ng-binding">'.$my_categories->name.'</span>&nbsp;&nbsp;</span>';
+					//$all_widgets .='<span ng-repeat="wcat in widget.categories" class="ng-scope"><span class="label label-info ng-binding">Monitoring</span>&nbsp;&nbsp;</span>';
+					//$all_widgets .='<span ng-repeat="wcat in widget.categories" class="ng-scope"><span class="label label-info ng-binding">User interaction</span>';
+				}
+				
+				$all_widgets .='&nbsp;&nbsp;</span><!-- end ngRepeat: wcat in widget.categories --></small>';
+				$all_widgets .='<br>';
+				$all_widgets .='<br>';
+				$all_widgets .='<p class="ng-binding">'.$obj[$i]->shortDescription.'</p>';
+				$all_widgets .='<p>';
+				$all_widgets .='<a class="btn btn-default" href="widget_view.php?id='.$obj[$i]->id.'" role="button">View details</a>';
+				$all_widgets .='</p>';
+				$all_widgets .='</div>';
+				$all_widgets .='</div>';
+			}
+			
+			//$all_widgets .='</div></div>';
+			print $all_widgets;
+			
+		}
+	
+	?>
+	
+	
 	
 
 		
@@ -838,6 +888,7 @@ while($row = $result_select_repository->fetch_array())
 									}
 				</script>
 				<div id="show_widget"></div>
+
 </div>
 
 <div style="display: none; position: fixed; top: 50%; left: 50%; margin-top: -250px; margin-left: -300px; vertical-align:middle; width:700px; height:500px;  z-index:99999; padding:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; border: 2px solid #333333; -moz-box-shadow:4px 4px 30px #130507; -webkit-box-shadow:4px 4px 30px #130507; box-shadow:4px 4px 30px #130507; -moz-transition:top 800ms; -o-transition:top 800ms; -webkit-transition:top 800ms;  transition:top 800ms; background-color:#FFFFFF; z-index:9999999;" id="dialog" class="window">
