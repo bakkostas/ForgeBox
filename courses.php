@@ -820,7 +820,7 @@
 			document.getElementById('generate_epub_file').style.display = 'none';
 			$.ajax({
 					type: "POST",
-					url: "functions/epub/epub_course.php?course_id=<?php echo $_GET['id']; ?>",					
+					url: "functions/epub/epub_course1.php?course_id=<?php echo $_GET['id']; ?>",					
 					dataType: "json",
 					success: function(msg){
 
