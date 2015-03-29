@@ -839,12 +839,13 @@
 		{
 			document.getElementById('generate_scorm_pkg_spin').innerHTML='<i class="fa-li fa fa-spinner fa-spin"></i>';
 			document.getElementById('generate_scorm_pkg').style.display = 'none';
+			
+			
 			$.ajax({
 					type: "POST",
 					url: "functions/create_scorm_pkg.php?course_id=<?php echo $_GET['id']; ?>",					
 					dataType: "json",
 					success: function(msg){
-						
 						if(msg.status==1)
 						{
 							document.getElementById('generate_scorm_pkg_spin').innerHTML='';

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+
 error_reporting( E_ERROR );
 ini_set('display_errors', 1);
 include "functions/conf.php";
@@ -86,12 +87,12 @@ include "functions/access_role.php";
 	<link href="summernote/summernote.css" / rel="stylesheet">
 	<script src="summernote/summernote.min.js"></script>
 	
-	<link rel="stylesheet" href="css/normalize.css">
+	<!-- <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/jquery.steps.css">
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script> -->
     <!-- <script src="../lib/jquery-1.9.1.min.js"></script> -->
-    <script src="js/jquery.cookie-1.3.1.js"></script>
-    <script src="js/jquery.steps.js"></script>
+    <!-- <script src="js/jquery.cookie-1.3.1.js"></script>
+    <script src="js/jquery.steps.js"></script> -->
 	
 	
 	<style type="text/css">
