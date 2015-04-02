@@ -62,6 +62,7 @@ include "functions/access_role.php";
 	<script src="js/popover.js"></script>	
 	<script src="js/tab.js"></script>	
 	<script src="js/modernizr.custom.js"></script>
+	<script type="text/javascript" src="js/jquery.form.min.js"></script>
 	
 	
     <!-- Metro UI CSS JavaScript plugins -->

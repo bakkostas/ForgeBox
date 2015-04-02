@@ -105,7 +105,7 @@
 							
 						}
 						
-						$query_select_mycourse= "SELECT id, title, sdescription FROM tbl_courses WHERE ".$where_case."  course_item_id=1 GROUP BY title";						
+						$query_select_mycourse= "SELECT id, title, sdescription FROM tbl_courses WHERE ".$where_case."  course_item_id=1 ORDER BY title";						
 						$result_select_mycourse = $connection->query($query_select_mycourse);
 		
 						while($row = $result_select_mycourse->fetch_array()){

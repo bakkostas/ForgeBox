@@ -234,7 +234,6 @@
 	}
  
  ?>
- 
 <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div>
 	<h1>
@@ -509,36 +508,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="text-decoration:none;">
-								Epub extra Meta data
-							</a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="accordion-body collapse">
-							<div class="accordion-inner">	
-								
-								<div class="row">
-									<div class="form-group col-md-8">
-										<label for="epubFrontCoverImage">Upload Front Cover Image :</label>
-										<input type="file" id="epubFrontCoverImage" ></input>
-									</div>
-								</div>
-								<button id="upload_Front_cover">Upload Front Cover Image</button><br /><br /><br />
-								<div class="row">
-									<div class="form-group col-md-8">
-										<label for="epubBackCoverImage">Upload Back Cover Image :</label>
-										<input type="file" id="epubBackCoverImage" ></input>
-									</div>
-								</div>
-								<button id="upload_Back_cover">Upload Back Cover Image</button><br /><br /><br />
-							</div>
-						</div>
-					</div>
 				</div>
-
 				<input type="hidden" id="interactive_item_" name="interactive_item_" value="<?php if(isset($interactive_item)){echo $interactive_item;} else { echo "";} ?>"></input>
 				<input type="hidden" id="action"  name="action" value="<?php if(isset($_GET["id"])) {echo "upd";}else{ echo "ins";} ?>"></input>
 				<input type="hidden" id="course_item_id"  name="course_item_id" value="<?php if(isset($_GET["citem"])){if($_GET["citem"]=="1"){echo "1";}else if($_GET["citem"]=="2"){echo "2";}else if($_GET["citem"]=="3"){echo "3";}} ?>"></input>
@@ -560,8 +530,10 @@
 			</div>
 		
 		</form>
-								
-								
+									
+		
+
+						
 				<?php
 				
 				if(isset($_GET["id"]) && isset($_GET["citem"]))
@@ -569,6 +541,32 @@
 					if($_GET["id"]>0 && $_GET["citem"]==1)
 					{
 				?>	
+					<br />
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-container">
+									<!-- <form enctype="multipart/form-data" name='imageform' role="form" id="imageform" method="post" action="functions/upload_course_images.php?course_id=<?php //print $_GET['id']; ?>"> -->
+									
+										<div class="form-group">
+											<h2>Please Choose Image: </h2>
+											<input class='file' type="file" class="form-control" name="images" id="images" placeholder="Please choose your image">
+											<span class="help-block"></span>
+										</div>
+										<div id="loader" style="display: none;">
+											Please wait image uploading to server....
+										</div>
+										<input type="hidden" value="<?php echo $_GET['id']; ?>" id="course_id" name="course_id" />
+										<!-- <input type="button" value="Upload" name="image_upload" id="image_upload" class="btn"/> -->
+									<button  name="image_upload" id="image_upload" class="btn btn-success" ><i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Upload</button>
+								</div>
+								<div class="clearfix"></div>
+								<div id="uploaded_images" class="uploaded-images">
+									<div id="error_div"></div>
+									<div id="success_div"></div>
+								</div>
+							</div>
+						</div>
+						<br /><br />
 						<h2>Generates files (epub, scorm)</h2>
 						<div class="row">
 							<div class="form-group col-md-8" style="padding-left:20px;">
@@ -630,6 +628,53 @@
 	
 	<script>
 	
+	
+	
+	
+	
+	
+	var xxx=<?php print $_GET["id"]; ?>
+	
+	
+
+		$("#image_upload").click(function()
+        {
+			//data to be sent to server         
+			var post_data = new FormData();    
+			post_data.append( 'course_id', xxx );
+			post_data.append( 'images', $('input[name=images]')[0].files[0] );
+
+
+			
+			
+						
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$.ajax({
+				url: "functions/upload_course_images.php",
+				data: post_data,
+				contentType: false,
+				processData: false,
+				type: "POST",
+				dataType: "json",
+				success: function(msg){
+					alert(msg.txt);
+				}					
+			});
+			
+			return false;
+			
+        });
+		
+		
+		
 		$('#return_back').click(function(){
 			parent.history.back();
 			return false;
@@ -855,6 +900,25 @@
 					}							
 				});
 		}
+		
+	
+		
+
+										function image_upload(){
+											alert('1');
+											
+											var str = $( "#upload_course_image" ).serialize();
+											alert(str);
+											$.ajax({
+												type: "POST",
+												data: new FormData(this),
+												url: "functions/upload_course_images.php?course_id=<?php echo $_GET['id']; ?>",					
+												dataType: "json",
+												success: function(msg){
+													alert('2');
+												}							
+											});
+										}
 		
 	</script>
 	

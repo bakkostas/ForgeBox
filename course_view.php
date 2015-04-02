@@ -65,11 +65,31 @@ accessRole("VIEW_WIDGETS",$connection) or die('<META HTTP-EQUIV="Refresh" CONTEN
 			</div>
 		</div>
 		<div class="row" style="float:right;">
-			<a class="btn btn-success" href="#" onclick="return false;" role="button">Install</a>
+			
+			<button class="btn btn-success" style="font-size:24px;" onclick="install_course('<?php print $obj->packageLocation;?>'); "><table><tr><td><i id="download_course" class="fa fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;</td><td>Install from <br/>FORGEStore</td></tr></table></button>
 		</div>
 		
 		
 	</div>
 	
+
+<script>
+
+	var install_url="";
+	function install_course(install_url)
+	{
+		$('#download_course').removeClass('fa-download');
+		$('#download_course').addClass('fa-refresh fa-spin');
+		$.ajax({
+		   url: 'install_course_function.php?get_link='+install_url,
+		   dataType: 'json',
+		   success: function(data){				
+				$('#download_course').removeClass('fa-refresh fa-spin');
+				$('#download_course').addClass('fa-check-square-o');
+		   }
+		});
+	}
 	
+</script>
+
 <?php include "footer.php"; ?>
