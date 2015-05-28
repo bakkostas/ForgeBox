@@ -87,10 +87,12 @@
 	object_id = "<?php print "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
 	
 	
-	var xxx='';
-	function myTinCanApi_Function(xxx) {		
-		alert(xxx);
-		alert('1');
+	var activitie_str='';
+	var verb_str='';
+	var verb_url_str='';
+	
+	function myTinCanApi_Function(activitie_str,verb_str,verb_url_str) {		
+		
 		var tincan = new TinCan (
             {
                 url: window.location.href,
@@ -116,14 +118,14 @@
 					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
 				  },
 				  verb: {
-					id: "http://adlnet.gov/expapi/verbs/experienced",
-					display: {"en-US": "experienced"}
+					id: verb_url_str,
+					display: {"en-US": verb_str}
 				},
 				object: {
 					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
 					definition: {
 						type: "http://adlnet.gov/expapi/activities/assessment",
-						name: { "en-US":  xxx },
+						name: { "en-US":  activitie_str },
 						extensions: {
 							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
 						}
