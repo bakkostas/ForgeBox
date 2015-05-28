@@ -87,6 +87,7 @@ if(!isset($_SESSION["UROLE_ID"]) OR ($_SESSION["UROLE_ID"]==7)) {
 			design and experimentation of new networking and service architectures and paradigms addressing all 
 			levels, including horizontal research on issues such as system complexity and security.
 			See more at <a href="http://www.ict-fire.eu">http://www.ict-fire.eu</a>
+		
 </p>
 
 
@@ -123,7 +124,7 @@ function printTeaserSignUpCourses($connection){
  }
 	
 function printCoursesTeaser($connection, $query_select_courses){
-	$result_select_course = $connection->query($query_select_courses)  or die("Error in query.." . mysqli_error($connection)); ;
+	$result_select_course = $connection->query($query_select_courses)  or die("Error in query.." . mysqli_error($connection));
 	while($row = $result_select_course->fetch_array()){
 		echo '<div class="col-sm-6 col-md-3" >';
 		echo '<div  style="border: #cecece; background-color: white;border-width: 1px;border-style: solid;padding: 5px;/*text-align: center;*/;border-radius: 5px;box-shadow: 2px 2px 9px #888888;">';
@@ -149,3 +150,77 @@ function printCoursesTeaser($connection, $query_select_courses){
 
  
  ?>
+
+ <?php
+	
+	if(isset($_SESSION['USERID']) && $_SESSION['USERID']>0 && $_SESSION['USERID']!=7)
+	{
+		?>
+		 <script type="text/javascript">
+			var tincan = new TinCan (
+            {
+                url: window.location.href,
+                activity: {
+                    id: "/index.php",
+                    definition: {
+                        name: {
+                            "en-US": "FORGEBox - index.php"
+                        },
+                        description: {
+                            "en-US": "FORGEBox - index.php"
+                        }, 
+                        type: "http://activitystrea.ms/schema/1.0/page"
+                    }
+                }
+            }
+        );
+
+        tincan.sendStatement(
+            {
+				actor: {
+					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
+					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
+				  },
+				  verb: {
+					id: "http://adlnet.gov/expapi/verbs/experienced",
+					display: {"en-US": "experienced"}
+				},
+				object: {
+					id: "http://localhost/git_Project/ForgeBox/index.php",
+					definition: {
+						type: "http://adlnet.gov/expapi/activities/assessment",
+						name: { "en-US": "Login FORGEBox" },
+						extensions: {
+							"http://localhost/git_Project/ForgeBox/index.php": "index"
+						}
+					}
+				},
+                context: {
+					extensions: {
+					  "http://localhost/git_Project/ForgeBox/index.php": "index.php"
+					}
+				},
+				authority: {
+					objectType: "Agent",
+					name: "<?php echo $adminName; ?>",
+					mbox: "mailto:<?php echo $adminEmail; ?>"
+					
+				}
+            },
+            function () {}
+        );
+    </script>
+		<?php
+	}
+	/*
+	if(!empty($_SESSION['lrs_name']) && !empty($_SESSION['lrs_endpoint_url']) && !empty($_SESSION['lrs_username']) && !empty($_SESSION['lrs_password']) && isset($_SESSION['lrs_login_record']))
+	{
+		$url_redirection = $_SERVER['HTTP_REFERER']."?endpoint=".$_SESSION['lrs_endpoint_url']."&auth=Basic ".base64_encode($_SESSION['lrs_username'] . ':' . $_SESSION['lrs_password']);
+				
+		print "<script>	alert('sdfsd'); window.location= '".$url_redirection."'; </script>";		
+		
+	}
+	*/
+	
+	
+	?>

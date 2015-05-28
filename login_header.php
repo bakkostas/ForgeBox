@@ -13,7 +13,8 @@
 					<h1 style="color:#FFFFFF;margin-top:0px">Sign In</h1>
 					<p  style="color:#FFFFFF;">Use the following fields to sign in FORGEBox</p>
 					<div class="status alert alert-success" style="display: none"></div>
-					<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+					<?php $auth_mbox = str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}")); ?>
+					<form action="<?php echo $_SERVER['PHP_SELF'];?>?endpoint=<?php print urlencode($lrs_endpoint); ?>&auth=Basic%20<?php print urlencode(base64_encode($lrs_authUser.":".$lrs_authPassword)); ?>&actor=<?php echo $auth_mbox; ?>" method="post">
 						<div class="form-group">							
 							<input type="email" class="form-control" id="InputEmail1" placeholder="email when sign up" name="username">
 						</div>

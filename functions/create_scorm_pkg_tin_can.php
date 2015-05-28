@@ -2,7 +2,7 @@
 
 	include "conf.php";
 	
-	$_GET['course_id']=40;
+	//$_GET['course_id']=40;
 	if(isset($_GET['course_id']))
 	{
 		$query_select= "SELECT id,title,author,publisher,sdescription,content FROM tbl_courses WHERE tbl_courses.id = ".$_GET['course_id'];
@@ -40,7 +40,7 @@
 		$menu_str = '<div class="col-md-3"><ul class="nav nav-pills nav-stacked">';
 		if($count_list==1)
 		{
-			$menu_str .= '<li class="id('.$id_course.')"><a href="../introduction/introduction.html?endpoint=https%3A%2F%2Fcloud.scorm.com%2Ftc%2FJU1A5ST1DW%2F&auth=Basic%20SlUxQTVTVDFEVzpvODJTNFdHVmJtR080VDIwSlZLcVVHbHNYYjZySnVUNHdEYjljcnZo&actor=%7B%22mbox%22%3A%5B%22mailto%3Akostas.bakoulias%40gmail.com%22%5D%2C%22name%22%3A%5B%22Kostas%22%5D%7D">'.$title_course.'</a></li>';
+			$menu_str .= '<li class="id('.$id_course.')"><a href="../introduction/introduction.html?endpoint=http://192.168.164.128/data/xAPI/%2F&auth=Basic%20SlUxQTVTVDFEVzpvODJTNFdHVmJtR080VDIwSlZLcVVHbHNYYjZySnVUNHdEYjljcnZo&actor=%7B%22mbox%22%3A%5B%22mailto%3Akostas.bakoulias%40gmail.com%22%5D%2C%22name%22%3A%5B%22Kostas%22%5D%7D">'.$title_course.'</a></li>';
 		}
 		for($i=0;$i<$count_list;$i++)
 		{
@@ -68,7 +68,8 @@
 				}
 		
 			
-				$menu_str .= '<li class="id('.$id_part_pre_int.')"><a href="../'.$id_part_pre_int.'/'.$id_part_pre_int.'.html?endpoint=https%3A%2F%2Fcloud.scorm.com%2Ftc%2FJU1A5ST1DW%2F&auth=Basic%20SlUxQTVTVDFEVzpvODJTNFdHVmJtR080VDIwSlZLcVVHbHNYYjZySnVUNHdEYjljcnZo&actor=%7B%22mbox%22%3A%5B%22mailto%3Akostas.bakoulias%40gmail.com%22%5D%2C%22name%22%3A%5B%22Kostas%22%5D%7D">'.$title_course_to_menu.'</a></li>';
+				//$menu_str .= '<li class="id('.$id_part_pre_int.')"><a href="../'.$id_part_pre_int.'/'.$id_part_pre_int.'.html?endpoint=https%3A%2F%2Fcloud.scorm.com%2Ftc%2FJU1A5ST1DW%2F&auth=Basic%20SlUxQTVTVDFEVzpvODJTNFdHVmJtR080VDIwSlZLcVVHbHNYYjZySnVUNHdEYjljcnZo&actor=%7B%22mbox%22%3A%5B%22mailto%3Akostas.bakoulias%40gmail.com%22%5D%2C%22name%22%3A%5B%22Kostas%22%5D%7D">'.$title_course_to_menu.'</a></li>';
+				$menu_str .= '<li class="id('.$id_part_pre_int.')"><a href="../'.$id_part_pre_int.'/'.$id_part_pre_int.'.html?endpoint=http://192.168.164.128/data/xAPI/%2F&auth=Basic%20SlUxQTVTVDFEVzpvODJTNFdHVmJtR080VDIwSlZLcVVHbHNYYjZySnVUNHdEYjljcnZo&actor=%7B%22mbox%22%3A%5B%22mailto%3Akostas.bakoulias%40gmail.com%22%5D%2C%22name%22%3A%5B%22Kostas%22%5D%7D">'.$title_course_to_menu.'</a></li>';
 			}
 		}
 		

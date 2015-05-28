@@ -1,6 +1,7 @@
 <?php 
 	include "header.php"; 
 	accessRole("VIEW_PRESENTATION",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "Course Presentation Part";
 ?>
  
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->

@@ -2,6 +2,7 @@
 include 'header.php'; 
 
 accessRole("USER_MANAGEMENT",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+$lrs_object_name = "Users Management";
 ?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
@@ -184,7 +185,7 @@ accessRole("USER_MANAGEMENT",$connection) or die('<META HTTP-EQUIV="Refresh" CON
 		
 		var monkeyList = new List('test-list', {
 		  valueNames: ['name'],
-		  page: 10,
+		  page: 30,
 		  plugins: [ ListPagination({}) ] 
 		});
 		

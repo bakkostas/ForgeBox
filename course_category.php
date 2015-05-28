@@ -17,7 +17,7 @@
 			
 		/*}
 	}*/
-   
+	$lrs_object_name = "Course Category";
    
    ?>
  <style>

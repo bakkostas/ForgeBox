@@ -13,6 +13,7 @@ while($row = $result_select_repository->fetch_array())
 	$count_repository++;
 }
 
+$lrs_object_name = "Course Market Place";
 ?>
 <style>
 .carousel-caption

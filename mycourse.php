@@ -2,7 +2,7 @@
 	include "header.php"; 
 	
 	accessRole("VIEW_MY_COURSES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
-
+	$lrs_object_name = "My Course Module";
 ?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
@@ -152,6 +152,7 @@
 							}
 							if(accessRole("PREVIEW_COURSE",$connection))
 							{
+								
 								$table_data .="<td><a href=\"preview_course.php?course_id=".$row[0]."\"><i class=\"glyphicon glyphicon-eye-open\"></i></a></td>";
 							}
 							else
