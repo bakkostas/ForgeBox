@@ -185,7 +185,7 @@ $lrs_object_name = "Users Management";
 		
 		var monkeyList = new List('test-list', {
 		  valueNames: ['name'],
-		  page: 10,
+		  page: 30,
 		  plugins: [ ListPagination({}) ] 
 		});
 		
