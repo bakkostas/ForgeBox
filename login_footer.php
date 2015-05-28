@@ -53,6 +53,10 @@
 						</div>
 						<div class="col-md-12" style="margin-left:0px;">
 							<div class="col-md-4"><a href="http://www.slideshare.net/ICT-FORGE" style="color:#FFFFFF;"><i class="fa fa-slideshare fg-white" style="font-size:32px;"></i> Slideshare</a></div>
+							<div class="col-md-4">
+
+							</div>
+
 						</div>
 					</div>
 				</div>

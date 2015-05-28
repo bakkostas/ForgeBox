@@ -11,7 +11,7 @@ include "functions/functions.php";
 
 include "functions/access_role.php";
 $url_lrs_endpoint='';
-if($_SESSION['USERID']>0 && $_SESSION['USERID']!=7){
+if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 			
 	$_SESSION['lrs_name']="";
 	$_SESSION['lrs_endpoint_url']="";
