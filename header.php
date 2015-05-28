@@ -3,6 +3,8 @@
 
 error_reporting( E_ERROR );
 ini_set('display_errors', 1);
+
+
 include "functions/conf.php";
 include "functions/session.php";
 include "functions/functions.php";
@@ -19,12 +21,12 @@ include "functions/access_role.php";
     <meta name="author" content="NAM ECE UoP">
 	<!-- fonts -->
 
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 
 
 	<!-- New Header Bootstrap Start -->
 	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> 
-	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
 	 <link href="css/font-awesome.css" rel="stylesheet">
 	<!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +55,7 @@ include "functions/access_role.php";
     <script src="js/prettify/prettify.js"></script>
 	-->
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>  
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>  
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/list.js"></script>
 	<script src="js/list.pagination.js"></script>	

@@ -1,6 +1,8 @@
 <?php
 	ini_set('session.cookie_path', ''); //fixes installation on other paths
+	
 	session_start();
+
 	//include "conf.php";
 	
 	if (!isset($_SESSION['SESSION'])) include ( "session_init.php");
