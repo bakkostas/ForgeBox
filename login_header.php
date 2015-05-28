@@ -8,6 +8,8 @@
 				<p style="color:#FFFFFF;"><?php echo $SiteNoteTeaser;?></p>
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<div class="row" >
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 					<h1 style="color:#FFFFFF;margin-top:0px">Sign In</h1>
 					<p  style="color:#FFFFFF;">Use the following fields to sign in FORGEBox</p>
 					<div class="status alert alert-success" style="display: none"></div>
@@ -21,9 +23,19 @@
 						
 						<br />
 						<button type="submit" class="btn btn-default">Sign In</button> or <a href="register.php" style="color: white";>Sign up for ForgeBox</a>
-					</form>	
-					<br />
-					<div>
+					</form>
+					<br />	
+					</div>
+					</div>
+					<div class="row" >
+						 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+                                                        <form action="https://www.forgebox.eu/fb/loginssaml.php" method="get">
+							<input type="hidden" name="login" value="1">
+                                                        <button type="submit" class="btn btn-info"><b>GRNet</b></button>
+                                                        </form>
+                                                  </div>
+
+						<div id="gConnect" class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
 						<?php if(!isset($_SESSION["UROLE_ID"]) || $_SESSION["UROLE_ID"]==7) {
 							$state = md5(rand());
 							$_SESSION['GPSTATE'] = $state;
@@ -31,7 +43,6 @@
 							//will print GOOGLE button only if not logged in
 							?>  
 
-								<div id="gConnect">
 									<button class="g-signin"
 										data-scope="email"
 
@@ -42,12 +53,13 @@
 										data-theme="dark"
 										data-cookiepolicy="single_host_origin">
 									</button>
-								  </div>
-								  
+
+						</div>
+
 						<?php }  ?>  
 
-					
-					
+
+
 					</div>
 				</div>
 
