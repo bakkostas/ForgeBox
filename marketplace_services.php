@@ -1,5 +1,6 @@
  <?php include "header.php"; 
 	accessRole("INSTALL_SERVICES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "Install Services";
 ?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->

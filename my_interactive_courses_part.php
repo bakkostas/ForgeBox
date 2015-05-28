@@ -2,6 +2,7 @@
 	include "header.php"; 
 	
 	accessRole("VIEW_INTERACTIVE_COURSE",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "Course Interactive Part";
 ?>
  
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->

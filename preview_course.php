@@ -1,7 +1,22 @@
+<!--
+<script src="js/tincanapi/TinCanJS/build/tincan-min.js" type="text/javascript"></script>
+	<script src="js/tincanapi/common.js" type="text/javascript"></script>
+	<script src="js/tincanapi/contentfunctions.js" type="text/javascript"></script>
+-->
 <?php 
 	include "header.php"; 
+	//require_once 'functions/lti/blti.php';
 	//include "functions/conf.php";
 	
+	/*
+	
+	print "<pre>\n";
+	print "Raw POST Parameters:\n\n";
+	foreach($_POST as $key => $value ) {
+		print "$key=$value\n";
+	}
+	print "</pre>";
+*/
 	if(isset($_GET['course_id']))
 	{
 	
@@ -34,7 +49,7 @@
 			$interactive_url=$row1[21];
 			$publish_to_anonymous = $row1[22];
 		}
-		
+		$lrs_object_name = $title_course;
 		if($publish_to_anonymous == 0 && $urole_id==7 )
 		{
 			?>
@@ -56,6 +71,133 @@
 	}
 	
 	?>
+	
+	
+	<script>
+	
+	
+	var user_name;
+	var user_email;
+	var self_file;
+	var object_id;
+	
+	user_name = "<?php echo $_SESSION['FNAME']." ".$_SESSION['LNAME']; ?>";
+	user_email = "<?php echo $_SESSION['EMAIL']; ?>";
+	self_file = "<?php print $_SERVER['PHP_SELF']; ?>";
+	object_id = "<?php print "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
+	
+	
+	var xxx='';
+	function myTinCanApi_Function(xxx) {		
+		alert(xxx);
+		alert('1');
+		var tincan = new TinCan (
+            {
+                url: window.location.href,
+                activity: {
+                    id: "<?php print $_SERVER['PHP_SELF']; ?>",
+                    definition: {
+                        name: {
+                            "en-US": "FORGEBox - <?php print $_SERVER['PHP_SELF']; ?>"
+                        },
+                        description: {
+                            "en-US": "FORGEBox - <?php print $_SERVER['PHP_SELF']; ?>"
+                        }, 
+                        type: "http://activitystrea.ms/schema/1.0/page"
+                    }
+                }
+            }
+        );
+
+        tincan.sendStatement(
+            {
+				actor: {
+					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
+					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
+				  },
+				  verb: {
+					id: "http://adlnet.gov/expapi/verbs/experienced",
+					display: {"en-US": "experienced"}
+				},
+				object: {
+					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
+					definition: {
+						type: "http://adlnet.gov/expapi/activities/assessment",
+						name: { "en-US":  xxx },
+						extensions: {
+							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
+						}
+					}
+				},
+                context: {
+					extensions: {
+					  "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
+					}
+				},
+				authority: {
+					objectType: "Agent",
+					name: "<?php echo $adminName; ?>",
+					mbox: "mailto:<?php echo $adminEmail; ?>"
+					
+				}
+            },
+            function () {}
+        );
+		
+		
+	}
+	
+	
+	
+	
+	
+		/*function Config() {
+			"use strict";
+		}
+		Config.endpoint = "http://www.forgebox.eu/lrs/learninglocker/public/data/xAPI/";
+		Config.authUser = "e9f5d5275d62a45515d57bdd562f3c45e46f96c8";
+		Config.authPassword = "8d1c16c00f45a3e93f03656acbcc8cd5a16b8f42";
+		Config.actor = { "mbox":["tranoris@ece.upatras.gr"], "name":["Christos"] };
+		
+		$(document).ready(function(){
+			
+            var PROTOTYPE_SHOW_CONFIG_INFO = true;
+            var PROTOTYPE_DEFAULT_NAME = Config.actor.name[0];
+            var PROTOTYPE_DEFAULT_MBOX = Config.actor.mbox[0];
+            var PROTOTYPE_ENDPOINT = 'http://www.forgebox.eu/lrs/learninglocker/public/data/xAPI/';
+            var PROTOTYPE_AUTH = 'Basic ' + Base64.encode('e9f5d5275d62a45515d57bdd562f3c45e46f96c8:8d1c16c00f45a3e93f03656acbcc8cd5a16b8f42');			
+		});*/
+		
+	</script>
+	<script type="text/javascript">
+		//alert(window.location.href);
+     /*   var tincan = new TinCan (
+            {
+                url: window.location.href,
+                activity: {
+                    id: GolfExample.CourseActivity.id + "/Etiquette/Course.html",
+                    definition: {
+                        name: {
+                            "en-US": "Etiquette - Course"
+                        },
+                        description: {
+                            "en-US": "An overview of golf etiquette as it pertains to the course."
+                        }
+                    }
+                }
+            }
+        );
+
+        tincan.sendStatement(
+            {
+                verb: "experienced",
+                context: GolfExample.getContext(
+                    GolfExample.CourseActivity.id
+                )
+            },
+            function () {}
+        );*/
+	</script>
 	
 <div id="CourseContentRow" class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div itemscope="" itemtype="http://schema.org/CreativeWork" > 

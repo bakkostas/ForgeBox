@@ -1,4 +1,7 @@
-<?php include "header.php"; ?>
+<?php include "header.php"; 
+
+$lrs_object_name = "Configuration Repository";
+?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 

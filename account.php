@@ -1,5 +1,6 @@
 <?php
 	include 'header.php'; 
+	$lrs_object_name = "My Account";
 ?>
 
 

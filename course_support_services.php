@@ -2,7 +2,7 @@
 	include "header.php"; 
 	accessRole("VIEW_COURSE_SUPPORT_SERVICES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
 
-
+	$lrs_object_name = "Course Support Service";
 ?>
 
 

@@ -1,6 +1,7 @@
 <?php include "header.php"; 
 
 accessRole("INSTALL_WIDGETS",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+$lrs_object_name = "Install New Widgets";
 
 $query_select_repository = "SELECT name, id FROM tbl_repository WHERE active=1";
 $result_select_repository = $connection->query($query_select_repository);

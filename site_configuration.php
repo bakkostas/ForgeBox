@@ -31,6 +31,7 @@
 		<?php
 		
 	}
+	$lrs_object_name = "Site Configuration";
 ?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->

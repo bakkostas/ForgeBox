@@ -168,7 +168,9 @@
 		}
 			
 		?>
-		
+			<?php
+		require_once('lrs_lib.php'); 
+	?>
 		
 </body>
 </html>
