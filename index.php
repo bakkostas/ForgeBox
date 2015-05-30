@@ -157,7 +157,7 @@ function printCoursesTeaser($connection, $query_select_courses){
 	{
 		?>
 		 <script type="text/javascript">
-			var tincan = new TinCan (
+			/*var tincan = new TinCan (
             {
                 url: window.location.href,
                 activity: {
@@ -174,7 +174,7 @@ function printCoursesTeaser($connection, $query_select_courses){
                 }
             }
         );
-
+*/
         tincan.sendStatement(
             {
 				actor: {

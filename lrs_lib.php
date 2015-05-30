@@ -1,10 +1,10 @@
 <?php
 	
-		if(isset($_SESSION['USERID']) && $_SESSION['USERID']>0 && $_SESSION['USERID']!=7)
+		if(isset($_SESSION['USERID']) && $_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7)
 		{
 		?>
 	<script>
-			
+			/*
 			var tincan = new TinCan (
             {
                 url: window.location.href,
@@ -21,8 +21,23 @@
                     }
                 }
             }
-        );
-
+        );*/
+	
+	var xapiendpoint = "<?php print $lrs_endpoint; ?>";
+	var xapiauthtxt = "<?php print "Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword); ?>";
+	var tincan = new TinCan (
+    {
+		url: window.location.href,
+		recordStores: [
+			{
+				endpoint:xapiendpoint,
+				auth:xapiauthtxt
+			}
+		]
+	}
+	);
+	
+	
         tincan.sendStatement(
             {
 				actor: {
@@ -42,17 +57,6 @@
 							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
 						}
 					}
-				},
-                context: {
-					extensions: {
-					  "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
-					}
-				},
-				authority: {
-					objectType: "Agent",
-					name: "<?php echo $adminName; ?>",
-					mbox: "mailto:<?php echo $adminEmail; ?>"
-					
 				}
             },
             function () {}

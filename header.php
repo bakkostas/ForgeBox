@@ -11,8 +11,10 @@ include "functions/functions.php";
 
 include "functions/access_role.php";
 $url_lrs_endpoint='';
-if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
+
+if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 			
+	/*
 	$_SESSION['lrs_name']="";
 	$_SESSION['lrs_endpoint_url']="";
 	$_SESSION['lrs_username']="";
@@ -28,8 +30,10 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 		$_SESSION['lrs_password']=$row_lrs[3];
 		$_SESSION['lrs_login_record']=1;
 	}
+	*/
+	
 
-	$url_lrs_endpoint = '?endpoint='.rawurlencode($_SESSION['lrs_endpoint_url']).'&auth=Basic%20'.urlencode(base64_encode($_SESSION['lrs_username'].":".$_SESSION['lrs_password'])).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));
+	//$url_lrs_endpoint = '?endpoint='.rawurlencode($lrs_endpoint).'&auth=Basic%20'.urlencode(base64_encode($lrs_authUser.":".$lrs_authPassword));
 }
 		
 ?>
@@ -155,6 +159,8 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 		
 </head>
 <body>
+
+	
 	<?php			
 		
 		//is_logged_in();
@@ -182,7 +188,7 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 
 		<nav class="row navigation-bar dark" style="height:60px">
 			<nav class="navbar-content">
-				<a href="index.php<?php print $url_lrs_endpoint; ?>" class="element" style="text-decoration:none; color:#FFFFFF;"><img src="images/FORGE_Logo_toolbar.png" style="margin-top: 5px;"/><br>at <?php echo $InstallationSite;?></a>
+				<a href="index.php" class="element" style="text-decoration:none; color:#FFFFFF;"><img src="images/FORGE_Logo_toolbar.png" style="margin-top: 5px;"/><br>at <?php echo $InstallationSite;?></a>
 			</nav>
 		</nav>
 		</div>
@@ -215,14 +221,14 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 								?>
 									<li class="divider"></li>
-									<li><a href="all_course.php<?php print $url_lrs_endpoint; ?>">All Course Modules</a></li>
+									<li><a href="all_course.php">All Course Modules</a></li>
 								<?php
 									}
 									if(accessRole("VIEW_MY_COURSES",$connection))
 									{
 								?>
 									<li class="divider"></li>
-									<li><a href="mycourse.php<?php print $url_lrs_endpoint; ?>">My Course Modules</a></li>
+									<li><a href="mycourse.php">My Course Modules</a></li>
 									<?php
 									
 									}
@@ -230,28 +236,28 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 									?>
 									<li class="divider"></li>
-									<li><a href="mypresentation.php<?php print $url_lrs_endpoint; ?>">Course Presentation Parts</a></li>
+									<li><a href="mypresentation.php">Course Presentation Parts</a></li>
 									<?php
 									}
 									if(accessRole("VIEW_INTERACTIVE_COURSE",$connection))
 									{
 									?>
 									<li class="divider"></li>
-									<li><a href="my_interactive_courses_part.php<?php print $url_lrs_endpoint; ?>">Course Interactive Parts</a></li>
+									<li><a href="my_interactive_courses_part.php">Course Interactive Parts</a></li>
 									<?php
 									}
 									if(accessRole("VIEW_CATEGORY_COURSE",$connection))
 									{
 									?>
 									<li class="divider"></li>
-									<li><a href="course_category.php<?php print $url_lrs_endpoint; ?>">Categories</a></li>
+									<li><a href="course_category.php">Categories</a></li>
 									<?php
 									}
 									if(accessRole("VIEW_COURSE_SUPPORT_SERVICES",$connection))
 									{
 									?>
 									<li class="divider"></li>
-									<li><a href="course_support_services.php<?php print $url_lrs_endpoint; ?>">Course Support Services</a></li>
+									<li><a href="course_support_services.php">Course Support Services</a></li>
 									<?php
 									}
 									
@@ -259,7 +265,7 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 									?>
 									<li class="divider"></li>
-									<li><a href="marketplace_courses.php<?php print $url_lrs_endpoint; ?>">Install Course from FORGEStore</a></li>
+									<li><a href="marketplace_courses.php">Install Course from FORGEStore</a></li>
 									<?php
 									}
 									?>
@@ -281,28 +287,28 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 										{
 									?>
 											<li class="divider"></li>
-											<li><a href="widgets.php<?php print $url_lrs_endpoint; ?>">My Installed Widgets</a></li>
+											<li><a href="widgets.php">My Installed Widgets</a></li>
 									<?php
 										}
 										if(accessRole("INSTALL_WIDGETS",$connection))
 										{
 									?>
 											<li class="divider"></li>
-											<li><a href="marketplace_widget.php<?php print $url_lrs_endpoint; ?>">Install New</a></li>
+											<li><a href="marketplace_widget.php">Install New</a></li>
 									<?php
 										}
 										if(accessRole("VIEW_MY_WIDGET",$connection))
 										{
 									?>
 											<li class="divider"></li>
-											<li><a href="manage_widgets.php<?php print $url_lrs_endpoint; ?>">Manage Widgets of local FORGEBox installation</a></li>
+											<li><a href="manage_widgets.php">Manage Widgets of local FORGEBox installation</a></li>
 									<?php
 										}
 										if(accessRole("NEW_EDIT_DELETE_WIDGET_CATEGORY",$connection))
 										{
 									?>
 											<li class="divider"></li>
-											<li><a href="localstore_list_widget_category.php<?php print $url_lrs_endpoint; ?>">Categories</a></li>
+											<li><a href="localstore_list_widget_category.php">Categories</a></li>
 									<?php
 										}
 									?>
@@ -323,7 +329,7 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 									?>
 										<li class="divider"></li>
-										<li><a href="services.php<?php print $url_lrs_endpoint; ?>">My Installed Services</a></li>
+										<li><a href="services.php">My Installed Services</a></li>
 									
 									<?php
 									}
@@ -331,14 +337,14 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 									?>
 										<li class="divider"></li>
-										<li><a href="marketplace_services.php<?php print $url_lrs_endpoint; ?>">Installed services</a></li>
+										<li><a href="marketplace_services.php">Installed services</a></li>
 									<?php
 									}
 									if(accessRole("VIEW_MY_SERVICES",$connection))
 									{
 									?>
 										<li class="divider"></li>
-										<li><a href="manage_services.php<?php print $url_lrs_endpoint; ?>">Manage Services</a></li>
+										<li><a href="manage_services.php">Manage Services</a></li>
 									<?php
 									}
 									?>
@@ -357,35 +363,35 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 								?>
 										<li class="divider"></li>
-										<li><a href="users.php<?php print $url_lrs_endpoint; ?>">Users Management</a></li>
+										<li><a href="users.php">Users Management</a></li>
 								<?php
 									}
 									if(accessRole("ACCESS_CONTROL",$connection))
 									{
 								?>
 										<li class="divider"></li>
-										<li><a href="action.php<?php print $url_lrs_endpoint; ?>">Access Control</a></li>
+										<li><a href="action.php">Access Control</a></li>
 								<?php
 									}
 									if(accessRole("NEW_EDIT_DELETE_REPOSITORY",$connection))
 									{
 								?>
 										<li class="divider"></li>
-										<li><a href="configure_repository.php<?php print $url_lrs_endpoint; ?>">Configure Repository</a></li>
+										<li><a href="configure_repository.php">Configure Repository</a></li>
 								<?php
 									}
 									if(accessRole("SITE_CONFIGURATION",$connection))
 									{
 								?>
 										<li class="divider"></li>
-										<li><a href="site_configuration.php<?php print $url_lrs_endpoint; ?>">Site Configuration</a></li>
+										<li><a href="site_configuration.php">Site Configuration</a></li>
 								<?php
 									}
 									if(accessRole("LRS_CONFIGURATION",$connection))
 									{
 								?>
 										<li class="divider"></li>
-										<li><a href="lrs_configuration.php<?php print $url_lrs_endpoint; ?>">LRS Configuration</a></li>
+										<li><a href="lrs_configuration.php">LRS Configuration</a></li>
 								<?php
 									}
 								?>
@@ -429,28 +435,28 @@ if($_SESSION['USERID']>0 && $_SESSION['USERID']==7){
 									{
 								?>
 									<li class="divider"></li>
-									<li><a href="account.php<?php print $url_lrs_endpoint; ?>">My Account</a></li>	
+									<li><a href="account.php">My Account</a></li>	
 								<?php
 									}
 									if(accessRole("REVIEWS",$connection))
 									{
 								?>	
 										<li class="divider"></li>
-										<li><a href="reviews.php<?php print $url_lrs_endpoint; ?>">My Reviews</a></li>
+										<li><a href="reviews.php">My Reviews</a></li>
 								<?php
 									}
 									if(accessRole("MY_DASHBOARD",$connection))
 									{
 								?>	
 										<li class="divider"></li>
-										<li><a href="dashboard.php<?php print $url_lrs_endpoint; ?>">My Dashboard</a></li>
+										<li><a href="dashboard.php">My Dashboard</a></li>
 								<?php
 									}
 									if(accessRole("NOTIFICATIONS",$connection))
 									{
 								?>	
 										<li class="divider"></li>
-										<li><a href="notification.php<?php print $url_lrs_endpoint; ?>">Notifications</a></li>
+										<li><a href="notification.php">Notifications</a></li>
 								<?php
 									}
 								?>	

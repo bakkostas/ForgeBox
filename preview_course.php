@@ -92,7 +92,7 @@
 	var verb_url_str='';
 	
 	function myTinCanApi_Function(activitie_str,verb_str,verb_url_str) {		
-		
+		/*
 		var tincan = new TinCan (
             {
                 url: window.location.href,
@@ -109,7 +109,7 @@
                     }
                 }
             }
-        );
+        ); */
 
         tincan.sendStatement(
             {
@@ -130,17 +130,6 @@
 							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
 						}
 					}
-				},
-                context: {
-					extensions: {
-					  "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
-					}
-				},
-				authority: {
-					objectType: "Agent",
-					name: "<?php echo $adminName; ?>",
-					mbox: "mailto:<?php echo $adminEmail; ?>"
-					
 				}
             },
             function () {}

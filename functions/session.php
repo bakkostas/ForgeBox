@@ -60,25 +60,6 @@
 				$_SESSION['AUTHENTICATION'] = "";
 			}
 		}
-		
-		if($_SESSION['USERID']>0 && $_SESSION['USERID']!=7){
-			
-			$_SESSION['lrs_name']="";
-			$_SESSION['lrs_endpoint_url']="";
-			$_SESSION['lrs_username']="";
-			$_SESSION['lrs_password']="";
-			
-			if(!empty($_SESSION['lrs_name']) && !empty($_SESSION['lrs_endpoint_url']) && !empty($_SESSION['lrs_username']) && !empty($_SESSION['lrs_password'])){
-				$Select_lrs="SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE id=12";	
-				$result_lrs = $connection->query($Select_lrs);
-				while($row_lrs = $result_lrs->fetch_array()){
-					$_SESSION['lrs_name']=$row_lrs[0];
-					$_SESSION['lrs_endpoint_url']=$row_lrs[1];
-					$_SESSION['lrs_username']=$row_lrs[2];
-					$_SESSION['lrs_password']=$row_lrs[3];
-				}
-			}
-		}
 	}	
 	
 	
