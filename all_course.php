@@ -5,7 +5,7 @@
 	$lrs_object_name = "All Course Module";
 	
 	//uid tou teacher
-	$query_select_lrs= "SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE uid=12";
+	/*$query_select_lrs= "SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE uid=12";
 			
 	$result_select_lrs = $connection->query($query_select_lrs);
 	
@@ -17,7 +17,7 @@
 		$_lrs_login_record=1;
 	}
 
-	$url_lrs_endpoint = '&endpoint='.rawurlencode($_lrs_endpoint_url).'&auth=Basic%20'.urlencode(base64_encode($_lrs_username.":".$_lrs_password)).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));	
+	$url_lrs_endpoint = '&endpoint='.rawurlencode($_lrs_endpoint_url).'&auth=Basic%20'.urlencode(base64_encode($_lrs_username.":".$_lrs_password)).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));	*/
 	
 ?>
 
@@ -111,7 +111,7 @@
 							
 						$table_data .="<td class=\"right\">".$course_files."</td>";
 						//$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].'&endpoint=http%3A%2F%2F192.168.164.128%2Fdata%2FxAPI%2F&auth=Basic%20Yzg4ZTQ2YjUyYWMyMTRkMzQ4ZWIyNmE1YTQ0NTI0MzM0YzU5ZDliMjoxZTJiYjlmYjcxZDEyYmIwMWE5YjY3ZTRmOGY1OTZkZTU1NDI3NThk&actor=%7B&quot;mbox&quot;%3A%5B&quot;mailto%3Akostas.bakoulias%40gmail.com&quot;%5D%2C&quot;name&quot;%3A%5B&quot;'.$_SESSION['FNAME'].'&quot;%5D%7D" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
-						$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].$url_add.'" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
+						$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].'" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
 						$table_data .="</tr>";
 		
 					}

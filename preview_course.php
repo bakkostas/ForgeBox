@@ -1,8 +1,3 @@
-<!--
-<script src="js/tincanapi/TinCanJS/build/tincan-min.js" type="text/javascript"></script>
-	<script src="js/tincanapi/common.js" type="text/javascript"></script>
-	<script src="js/tincanapi/contentfunctions.js" type="text/javascript"></script>
--->
 <?php 
 	include "header.php"; 
 	//require_once 'functions/lti/blti.php';
@@ -17,6 +12,10 @@
 	}
 	print "</pre>";
 */
+
+	$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actor=".urlencode("{&quot;mbox&quot;:[&quot;mailto:".$_SESSION['EMAIL']."&quot;],&quot;name&quot;:[&quot;".$_SESSION['FNAME'].' '.$_SESSION['LNAME']."&quot;]}"); 
+	
+	
 	if(isset($_GET['course_id']))
 	{
 	
@@ -234,14 +233,14 @@
 				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px; height: inherit;"  > ';
 				echo "<div style=\"height:inherit; overflow:scroll;\">";
 				
-				printCoursePart($connection, $_GET['course_id'],"twocol", 0); //printModule Content in left part column
+				printCoursePart($connection, $_GET['course_id'],"twocol", 0,$url_iframe); //printModule Content in left part column
 				
 				for($i=0; $i<$count_list;$i++)
 				{
 					echo "<div itemprop=\"citation\">";
 					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
 					{						
-						printCoursePart($connection, $presentation_id[$i]);
+						printCoursePart($connection, $presentation_id[$i],"",0,$url_iframe);
 					}
 					echo "</div>";
 				}
@@ -256,7 +255,7 @@
 					if($presentation_id[$i]==0 && $interactive_id[$i]>0)
 					{
 						//interactive
-						printCoursePart($connection, $interactive_id[$i]);
+						printCoursePart($connection, $interactive_id[$i],"","",$url_iframe);
 					}
 					echo "</div>";
 				}
@@ -335,13 +334,13 @@
 				{
 					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
 					{
-						printCoursePart($connection, $presentation_id[$i], "section", $count_pres);
+						printCoursePart($connection, $presentation_id[$i], "section", $count_pres,$url_iframe);
 						
 						
 					}
 					else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
 					{
-						printCoursePart($connection, $interactive_id[$i], "section", $count_pres);
+						printCoursePart($connection, $interactive_id[$i], "section", $count_pres,$url_iframe);
 					}
 				
 					$count_pres++;
@@ -362,18 +361,18 @@
 					<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 					<?php
 				}
-			printCoursePart($connection, $_GET['course_id']);
+			printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
 
 			for($i=0; $i<$count_list;$i++)
 			{
 				echo "<span itemprop=\"citation\">";
 				if($presentation_id[$i]>0 && $interactive_id[$i]==0)
 				{
-					printCoursePart($connection, $presentation_id[$i]);
+					printCoursePart($connection, $presentation_id[$i],"","",$url_iframe);
 				}
 				else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
 				{					
-					printCoursePart($connection, $interactive_id[$i]);
+					printCoursePart($connection, $interactive_id[$i],"","",$url_iframe);
 				}
 				echo "</span>";
 			}
@@ -537,7 +536,7 @@ function printTitleAndHintInfo($hintTitle, $coursetitle, $author, $publisher, $c
 
 
 
-function printCoursePart( $connection, $course_id, $issectionparts, $partid ){
+function printCoursePart( $connection, $course_id, $issectionparts, $partid , $url_iframe){
 	
 	$query_select_present= "SELECT title, content, author, create_date, publisher, language, about, alignmentType, educationalFramework, ".
 	"targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, ".
@@ -575,10 +574,14 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid ){
 		echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';
 		echo html_entity_decode($row[1]);
 		echo "</div><!-- end col-sm-12 div-->";
-		
+		if(strpos($row[21], "?")==false){
+			$url_iframe="?".$url_iframe;
+		}else{
+			$url_iframe="&".$url_iframe;
+		}
 		if ($row[21]){
-			echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';
-			echo "<iframe width=\"100%\" height=\"450px\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21]."\"></iframe>";	
+			echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';			
+			echo "<iframe width=\"100%\" height=\"450px\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21].$url_iframe."\"></iframe>";	
 			echo "</div><!-- end col-sm-12 div-->";
 		}
 		
