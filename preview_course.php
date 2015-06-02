@@ -13,7 +13,7 @@
 	print "</pre>";
 */
 
-	$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actor=".urlencode("{&quot;mbox&quot;:[&quot;mailto:".$_SESSION['EMAIL']."&quot;],&quot;name&quot;:[&quot;".$_SESSION['FNAME'].' '.$_SESSION['LNAME']."&quot;]}"); 
+	$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 	
 	
 	if(isset($_GET['course_id']))
