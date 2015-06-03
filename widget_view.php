@@ -67,9 +67,38 @@ accessRole("VIEW_WIDGETS",$connection) or die('<META HTTP-EQUIV="Refresh" CONTEN
 			</div>
 		</div>
 		
-		
+		<div style="float:right;">
+			<a href="#" class="btn btn-primary" onclick="insert_widget();">Install</a>
+		</div>
 		
 	</div>
 	
-	
+	<script>
+		function insert_widget()
+		{	
+		
+			//var str = document.getElementById('select_repository').value;
+			//var marketid = str.replace('marketplace_widget.php?rep_id=','');
+			var data1 = 'userid=<?php print $_SESSION["USERID"]; ?>&widgetid=<?php print $_GET["id"]; ?>&title_widget=<?php print $obj->name; ?>&author_widget=<?php print $my_owner->neme; ?>&description_widget=<?php print $obj->shortDescription; ?>&marketplace_id=1&version=<?php print $obj->version; ?>&url_widget=<?php print $obj->url; ?>';
+							
+			$.ajax({
+				type: "POST",
+				url: "functions/insert_widget_in_marketplace.php",
+				data: data1,
+				dataType: "json",
+				success: function(msg){
+					if(parseInt(msg.status)==1)
+					{
+						//window.location='marketplace_widget.php?rep_id='+marketid;
+						alert('Installed');
+					}
+					else if(parseInt(msg.status)==0)
+					{				
+						alert('Error');
+					}
+				}
+			});
+		}
+						
+	</script>
 <?php include "footer.php"; ?>
