@@ -15,6 +15,18 @@
 
 	$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 	
+	$query_select_lrs_teacher= "SELECT lrs_details.endpoint_url, lrs_details.username, lrs_details.password FROM lrs_details INNER JOIN match_course_lrs ON lrs_details.id = match_course_lrs.lrs_id  WHERE match_course_lrs.course_id = ".$_GET['course_id'];	
+	
+	$result_select_lrs_teacher = $connection->query($query_select_lrs_teacher);
+		
+	while($row = $result_select_lrs_teacher->fetch_array()){
+		$lrs_endpoint_teacher = $row[0];
+		$lrs_authUser_teacher = $row[1];
+		$lrs_authPassword_teacher = $row[2];
+	}
+	if (strpos($lrs_endpoint_teacher,'http') == false) {
+		$lrs_endpoint_teacher = "http://".$lrs_endpoint_teacher;
+	}
 	
 	if(isset($_GET['course_id']))
 	{
@@ -73,8 +85,49 @@
 	
 	
 	<script>
+		
+	var xapiendpoint2 = "<?php print $lrs_endpoint_teacher; ?>";
+	var xapiauthtxt2 = "<?php print "Basic ".base64_encode($lrs_authUser_teacher.":".$lrs_authPassword_teacher); ?>";
+	
+	var tincan1 = new TinCan (
+    {
+		url: window.location.href,
+		recordStores: [
+			{
+				endpoint:xapiendpoint2,
+				auth:xapiauthtxt2
+			}
+		]
+	}
+	);
 	
 	
+        tincan1.sendStatement(
+            {
+				actor: {
+					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
+					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
+				  },
+				  verb: {
+					id: "http://adlnet.gov/expapi/verbs/experienced",
+					display: {"en-US": "experienced"}
+				},
+				object: {
+					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
+					definition: {
+						type: "http://adlnet.gov/expapi/activities/assessment",
+						name: { "en-US": "<?php print $lrs_object_name; ?>" },
+						extensions: {
+							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
+						}
+					}
+				}
+            },
+            function () {}
+        );
+		
+		
+	/*
 	var user_name;
 	var user_email;
 	var self_file;
@@ -84,7 +137,7 @@
 	user_email = "<?php echo $_SESSION['EMAIL']; ?>";
 	self_file = "<?php print $_SERVER['PHP_SELF']; ?>";
 	object_id = "<?php print "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
-	
+	*/
 	
 	var activitie_str='';
 	var verb_str='';
@@ -134,7 +187,29 @@
             function () {}
         );
 		
-		
+		tincan1.sendStatement(
+            {
+				actor: {
+					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
+					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
+				  },
+				  verb: {
+					id: verb_url_str,
+					display: {"en-US": verb_str}
+				},
+				object: {
+					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
+					definition: {
+						type: "http://adlnet.gov/expapi/activities/assessment",
+						name: { "en-US":  activitie_str },
+						extensions: {
+							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
+						}
+					}
+				}
+            },
+            function () {}
+        );
 	}
 	
 	
@@ -466,8 +541,9 @@ $(window).ready(function () {
 	<?php if(isset($_GET['noheaders']) && $_GET['noheaders']==1){ //trick to Hide header and all to show the course clear for embedded usage in other pages
 	?>showFullScreen();
 	<?php }
-	else {
+	else { ?>
 		return_screen();
+		<?php
 	}
 	//if....?>
 	

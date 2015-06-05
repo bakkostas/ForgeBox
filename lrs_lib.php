@@ -25,6 +25,7 @@
 	
 	var xapiendpoint = "<?php print $lrs_endpoint; ?>";
 	var xapiauthtxt = "<?php print "Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword); ?>";
+	
 	var tincan = new TinCan (
     {
 		url: window.location.href,
@@ -61,6 +62,7 @@
             },
             function () {}
         );
+		
 </script>
 			<?php
 		}

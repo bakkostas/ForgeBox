@@ -27,7 +27,7 @@
 										
 				$query_update_user = "UPDATE tbl_users SET name_user='$fname' ,surname_user='$lname' ,email_user='$email' WHERE active_user=1 AND id_user=".$_SESSION['USERID'];
 														
-				echo $query_update_user;										
+				//echo $query_update_user;										
 				$result_update_user = $connection->query($query_update_user);
 				
 				die(msg(1,"User  updated!"));

@@ -530,7 +530,45 @@
 			</div>
 		
 		</form>
-									
+					
+		<div class="col-sm-8">	
+			<br><br>
+			
+		<?php 
+			if(isset($_GET['id'])){ ?>
+				<select class="form-control" id="select_lrs">
+					<option value="0">Select Learning Record Store</option>
+			<?php
+			$query_select_lrs= "SELECT id, lrs_name FROM lrs_details WHERE uid =".$_SESSION['USERID'];
+			$result_select_lrs = $connection->query($query_select_lrs);
+		
+			while($row = $result_select_lrs->fetch_array()){
+				
+				$query_select_current_lrs= "SELECT lrs_id FROM match_course_lrs WHERE course_id =".$_GET['id'];
+				$result_select_current_lrs = $connection->query($query_select_current_lrs);
+				if($result_select_current_lrs->num_rows > 0)
+				{
+				?>
+				<option value="<?php print $row[0]; ?>" selected ><?php print $row[1]; ?></option>
+				<?php
+				}
+				else{
+					?>
+					<option value="<?php print $row[0]; ?>"><?php print $row[1]; ?></option>
+				<?php
+				}
+			}
+			?>
+			
+				</select>
+		<?php } ?>
+			<br />
+			<div class="col-md-4">
+				<a href="#" id="lrs_save" class="btn btn-primary form-control" onclick="if(document.getElementById('select_lrs').value != 0){ save_course_lrs(document.getElementById('select_lrs').value); return false;}else{ delete_course_lrs(document.getElementById('select_lrs').value);} return false;">Save LRS</a>
+			</div>
+			<br><br>
+		</div>
+				
 		
 
 						
@@ -613,29 +651,13 @@
 					}
 				?>
 
-
-
-
-
-
-			
-		
 	<!-- </div> -->
-		
-	
 	
 <!--  ------------------------  END CONTENT      ------------------------      -->
 	
 	<script>
 	
-	
-	
-	
-	
-	
 	var xxx=<?php print $_GET["id"]; ?>
-	
-	
 
 		$("#image_upload").click(function()
         {
@@ -643,19 +665,6 @@
 			var post_data = new FormData();    
 			post_data.append( 'course_id', xxx );
 			post_data.append( 'images', $('input[name=images]')[0].files[0] );
-
-
-			
-			
-						
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			$.ajax({
 				url: "functions/upload_course_images.php",
@@ -919,6 +928,30 @@
 												}							
 											});
 										}
+
+		function save_course_lrs(lrs_id){
+			
+			$.ajax({
+					type: "POST",
+					url: "functions/save_lrs.php?lrs_id="+lrs_id+"&cid=<?php print $_GET["id"]; ?>",
+					dataType: "json",
+					success: function(msg){
+						alert(msg.txt);
+					}							
+			});			
+		}
+		
+		function delete_course_lrs(lrs_id1){
+			
+			$.ajax({
+					type: "POST",
+					url: "functions/save_lrs.php?lrs_id="+lrs_id1+"&action=del&cid=<?php print $_GET["id"]; ?>",
+					dataType: "json",
+					success: function(msg){
+						alert(msg.txt);
+					}							
+			});			
+		}
 		
 	</script>
 	
