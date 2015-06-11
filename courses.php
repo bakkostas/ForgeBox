@@ -530,48 +530,94 @@
 			</div>
 		
 		</form>
-					
-		<div class="col-sm-8">	
-			<br><br>
-			
+		
+		
+		<?php
+		if(isset($_GET['id']) && isset($_GET["citem"])){ 
+		?>
+			<div class="page-header">
+				<h1>Extra features</h1>
+			</div>
+		<?php
+		}
+		?>
+		
+		
+		
+		<?php 
+			if(isset($_GET['id']) && isset($_GET["citem"])){ 
+				if($_GET["id"]>0 && $_GET["citem"]==1)
+				{
+			?>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Select Learning Record Store(LRS)</h3>
+						</div>
+						<div class="panel-body">
+							<div class="col-sm-12">	
+								<select class="form-control" id="select_lrs">
+									<option value="0">Select Learning Record Store</option>
+										<?php
+										$query_select_lrs= "SELECT id, lrs_name FROM lrs_details WHERE uid =".$_SESSION['USERID'];
+										$result_select_lrs = $connection->query($query_select_lrs);
+									
+										while($row = $result_select_lrs->fetch_array()){
+											
+											$query_select_current_lrs= "SELECT lrs_id FROM match_course_lrs WHERE course_id =".$_GET['id'];
+											$result_select_current_lrs = $connection->query($query_select_current_lrs);
+											if($result_select_current_lrs->num_rows > 0)
+											{
+											?>
+											<option value="<?php print $row[0]; ?>" selected ><?php print $row[1]; ?></option>
+											<?php
+											}
+											else{
+												?>
+												<option value="<?php print $row[0]; ?>"><?php print $row[1]; ?></option>
+											<?php
+											}
+										}
+										?>
+								</select>
+		
+								<br />
+								<div class="col-md-4">
+									<a href="#" id="lrs_save" class="btn btn-primary form-control" onclick="if(document.getElementById('select_lrs').value != 0){ save_course_lrs(document.getElementById('select_lrs').value); return false;}else{ delete_course_lrs(document.getElementById('select_lrs').value);} return false;">Save LRS</a>
+								</div>
+							</div>
+						</div>
+					</div>			
+			<?php 	} 
+			}
+		?>
+			<br />
+		
 		<?php 
 			if(isset($_GET['id'])){ ?>
-				<select class="form-control" id="select_lrs">
-					<option value="0">Select Learning Record Store</option>
-			<?php
-			$query_select_lrs= "SELECT id, lrs_name FROM lrs_details WHERE uid =".$_SESSION['USERID'];
-			$result_select_lrs = $connection->query($query_select_lrs);
-		
-			while($row = $result_select_lrs->fetch_array()){
-				
-				$query_select_current_lrs= "SELECT lrs_id FROM match_course_lrs WHERE course_id =".$_GET['id'];
-				$result_select_current_lrs = $connection->query($query_select_current_lrs);
-				if($result_select_current_lrs->num_rows > 0)
-				{
-				?>
-				<option value="<?php print $row[0]; ?>" selected ><?php print $row[1]; ?></option>
-				<?php
-				}
-				else{
-					?>
-					<option value="<?php print $row[0]; ?>"><?php print $row[1]; ?></option>
-				<?php
-				}
-			}
-			?>
-			
-				</select>
+				<div class="row">
+					<div class="col-sm-12">	
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Change author</h3>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-3">
+									Send <?php if($_GET["citem"]==1){print "Course Module to "; }else if($_GET["citem"]==2){print "Presentasion Part to ";}else if($_GET["citem"]==3){print "Interactive Part to ";} ?>
+								</div>
+								<div class="col-md-6">
+									<input type="text" id="chg_email_author" placeholder="Insert author email" class="form-control" />
+									<input type="hidden" id="chg_course_id" value="<?php print $_GET["id"]; ?>" />
+								</div>
+								<div class="col-md-2">
+									<a href="#" onclick="send_course_to_new_author(); return false;" class="btn btn-primary">Send</a>
+								</div>
+							</div>
+						</div>				
+					</div>
+				</div>
 		<?php } ?>
-			<br />
-			<div class="col-md-4">
-				<a href="#" id="lrs_save" class="btn btn-primary form-control" onclick="if(document.getElementById('select_lrs').value != 0){ save_course_lrs(document.getElementById('select_lrs').value); return false;}else{ delete_course_lrs(document.getElementById('select_lrs').value);} return false;">Save LRS</a>
-			</div>
-			<br><br>
-		</div>
-				
-		
-
-						
+			</br />
+	
 				<?php
 				
 				if(isset($_GET["id"]) && isset($_GET["citem"]))
@@ -582,62 +628,76 @@
 					<br />
 						<div class="row">
 							<div class="col-md-12">
-								<div class="form-container">
-									<!-- <form enctype="multipart/form-data" name='imageform' role="form" id="imageform" method="post" action="functions/upload_course_images.php?course_id=<?php //print $_GET['id']; ?>"> -->
-									
-										<div class="form-group">
-											<h2>Please Choose Image: </h2>
-											<input class='file' type="file" class="form-control" name="images" id="images" placeholder="Please choose your image">
-											<span class="help-block"></span>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Please Choose Image: </h3>
+									</div>
+									<div class="panel-body">
+										<div class="form-container">
+											<div class="form-group">											
+												<input class='file' type="file" class="form-control" name="images" id="images" placeholder="Please choose your image">
+												<span class="help-block"></span>
+											</div>
+											<div id="loader" style="display: none;">
+												Please wait image uploading to server....
+											</div>
+											<input type="hidden" value="<?php echo $_GET['id']; ?>" id="course_id" name="course_id" />
+											<button  name="image_upload" id="image_upload" class="btn btn-success" >
+												<i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Upload
+											</button>
 										</div>
-										<div id="loader" style="display: none;">
-											Please wait image uploading to server....
+										<div class="clearfix"></div>
+										<div id="uploaded_images" class="uploaded-images">
+											<div id="error_div"></div>
+											<div id="success_div"></div>
 										</div>
-										<input type="hidden" value="<?php echo $_GET['id']; ?>" id="course_id" name="course_id" />
-										<!-- <input type="button" value="Upload" name="image_upload" id="image_upload" class="btn"/> -->
-									<button  name="image_upload" id="image_upload" class="btn btn-success" ><i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Upload</button>
-								</div>
-								<div class="clearfix"></div>
-								<div id="uploaded_images" class="uploaded-images">
-									<div id="error_div"></div>
-									<div id="success_div"></div>
-								</div>
+									</div>
+								</div>	
+								<br />
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Generates files (epub, scorm)</h3>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="form-group col-md-8" style="padding-left:20px;">
+												<h3>Generate e-pub file</h3>
+												<div id="generate_epub_file" style="display:none;" class="alert alert-success alert-dismissible" role="alert">
+													<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													<strong>Well done!</strong> Your epub generated! Please check the file!
+												</div>
+												<div class="row">
+													<ul class="fa-ul">
+														<li><span id="generate_epub_file_spin" style="padding-top:25px;"></span><a href="#" type="button" <?php if(isset($_GET["id"])){ if($_GET["id"]>0){ echo "";}else {echo "disabled=\"disabled\"";}}else {echo "disabled=\"disabled\"";} ?> onclick="generate_epub();return false;" class="btn btn-success" id="generate_epub">&nbsp;Generate e-pub file</a></li>
+													</ul>
+													
+													
+												</div>
+											</div>
+										</div>								
+										<div class="row">
+											<div class="form-group col-md-8" style="padding-left:20px;">
+												<h3>Generate scorm file</h3>
+												<div id="generate_scorm_pkg" style="display:none;" class="alert alert-success alert-dismissible" role="alert">
+													<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													<strong>Well done!</strong> Your scorm package generated! Please check the file!
+												</div>
+												<div class="row">
+													<ul class="fa-ul">
+														<li><span id="generate_scorm_pkg_spin" style="padding-top:25px;"></span><a href="#" type="button" <?php if(isset($_GET["id"])){ if($_GET["id"]>0){ echo "";}else {echo "disabled=\"disabled\"";}}else {echo "disabled=\"disabled\"";} ?> onclick="generate_scorm();return false;" class="btn btn-success" id="generate_scorm">Generate scorm file</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>	
+								
+								
 							</div>
 						</div>
-						<br /><br />
-						<h2>Generates files (epub, scorm)</h2>
-						<div class="row">
-							<div class="form-group col-md-8" style="padding-left:20px;">
-								<h3>Generate e-pub file</h3>
-								<div id="generate_epub_file" style="display:none;" class="alert alert-success alert-dismissible" role="alert">
-									<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-									<strong>Well done!</strong> Your epub generated! Please check the file!
-								</div>
-								<div class="row">
-									<ul class="fa-ul">
-										<li><span id="generate_epub_file_spin" style="padding-top:25px;"></span><a href="#" type="button" <?php if(isset($_GET["id"])){ if($_GET["id"]>0){ echo "";}else {echo "disabled=\"disabled\"";}}else {echo "disabled=\"disabled\"";} ?> onclick="generate_epub();return false;" class="btn btn-success" id="generate_epub">&nbsp;Generate e-pub file</a></li>
-									</ul>
-									
-									
-								</div>
-							</div>
-						</div>								
-						<div class="row">
-							<div class="form-group col-md-8" style="padding-left:20px;">
-								<h3>Generate scorm file</h3>
-								<div id="generate_scorm_pkg" style="display:none;" class="alert alert-success alert-dismissible" role="alert">
-									<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-									<strong>Well done!</strong> Your scorm package generated! Please check the file!
-								</div>
-								<div class="row">
-									<ul class="fa-ul">
-										<li><span id="generate_scorm_pkg_spin" style="padding-top:25px;"></span><a href="#" type="button" <?php if(isset($_GET["id"])){ if($_GET["id"]>0){ echo "";}else {echo "disabled=\"disabled\"";}}else {echo "disabled=\"disabled\"";} ?> onclick="generate_scorm();return false;" class="btn btn-success" id="generate_scorm">Generate scorm file</a></li>
-									</ul>
-									
-									
-								</div>
-							</div>
-						</div>	
+						<br />
+						
+						
 				<?php
 					}
 					
@@ -951,6 +1011,21 @@
 						alert(msg.txt);
 					}							
 			});			
+		}
+		
+		function send_course_to_new_author(){
+			if($('#chg_email_author').val()!=''){
+			$.ajax({
+					type: "POST",
+					url: "functions/send_course_to_author.php?user="+$('#chg_email_author').val()+"&c_id="+$('#chg_course_id').val(),
+					dataType: "json",
+					success: function(msg){
+						alert(msg.txt);
+					}							
+			});
+			}else{
+				alert('Insert email!');
+			}
 		}
 		
 	</script>
