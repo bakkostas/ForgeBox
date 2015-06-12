@@ -12,8 +12,6 @@
 	}
 	print "</pre>";
 */
-
-	$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 	
 	$query_select_lrs_teacher= "SELECT lrs_details.endpoint_url, lrs_details.username, lrs_details.password FROM lrs_details INNER JOIN match_course_lrs ON lrs_details.id = match_course_lrs.lrs_id  WHERE match_course_lrs.course_id = ".$_GET['course_id'];	
 	
@@ -79,6 +77,21 @@
 			
 			$count_list++;
 		}
+	}
+	
+	
+	if(isset($lrs_endpoint_teacher)){
+		if(!empty($lrs_endpoint_teacher)){
+			$url_iframe = "xendpoint=".urlencode($lrs_endpoint_teacher)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser_teacher.":".$lrs_authPassword_teacher))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
+		}
+		else
+		{
+			$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
+		}
+	}
+	else
+	{
+		$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 	}
 	
 	?>
