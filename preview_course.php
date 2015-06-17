@@ -80,8 +80,8 @@
 	}
 	
 	
-	if(isset($lrs_endpoint_teacher)){
-		if(!empty($lrs_endpoint_teacher)){
+	if(isset($lrs_endpoint_teacher) && !empty($lrs_endpoint_teacher)){		
+		if($lrs_endpoint_teacher != "http://"){
 			$url_iframe = "xendpoint=".urlencode($lrs_endpoint_teacher)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser_teacher.":".$lrs_authPassword_teacher))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 		}
 		else
@@ -90,7 +90,7 @@
 		}
 	}
 	else
-	{
+	{ 
 		$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']); 
 	}
 	
@@ -279,7 +279,6 @@
 	
 <div id="CourseContentRow" class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div itemscope="" itemtype="http://schema.org/CreativeWork" > 
-	 
 		<div id="FORGETitleWindow" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h1>
 				<a href="index.php" id="return_back" style="text-decoration:none;">
@@ -669,7 +668,7 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid , $u
 			$url_iframe="&".$url_iframe;
 		}
 		if ($row[21]){
-			echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';			
+			echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';	
 			echo "<iframe width=\"100%\" height=\"450px\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21].$url_iframe."\"></iframe>";	
 			echo "</div><!-- end col-sm-12 div-->";
 		}
