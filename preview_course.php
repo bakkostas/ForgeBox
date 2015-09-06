@@ -1,17 +1,56 @@
 <?php 
 	include "header.php"; 
-	//require_once 'functions/lti/blti.php';
-	//include "functions/conf.php";
+	require_once 'functions/lti/blti.php';
+		
+	if(!empty($_POST)){
+		$query_select_user = "SELECT count(id_user) FROM tbl_users WHERE email_user='".$_POST['lis_person_contact_email_primary']."'";
+		$result_select_user = $connection->query($query_select_user);
+		
+		while($row = $result_select_user->fetch_array())
+		{
+			$is_active_user = $row[0];
+		}
+		
+		if($is_active_user==0){
+			//Insert user
+			$query_install_users = "INSERT INTO tbl_users(name_user, surname_user, email_user, password_user, active_user, register_date, last_login_date, avatar_name, auth_type) VALUES ('".$_POST["lis_person_name_given"]."','".$_POST["lis_person_name_family"]."','".$_POST["lis_person_contact_email_primary"]."','".MD5(RAND())."',1,now(),now(),'','".$_POST["tool_consumer_instance_name"]."')";
+			
+			$result_install_user = $connection->query($query_install_users);
+			
+			
+			$query_select_user_id = "SELECT id_user FROM tbl_users WHERE email_user='".$_POST['lis_person_contact_email_primary']."'";
+			$result_select_user_id = $connection->query($query_select_user_id);
+		
+			while($row1 = $result_select_user_id->fetch_array())
+			{
+				$_user_id = $row1[0];
+			}
+			
+			print strpos($_POST['lis_person_contact_email_primary'],'Instructor');
+			if(strpos($_POST['roles'],'Instructor') !== false){
+				$role_id=5;
+			}
+			else
+			{
+				$role_id=6;
+			}
+			$query_user_role="INSERT INTO tbl_user_role(id_user, id_role) VALUES (".$_user_id.",".$role_id.")";
+			$results_user_role = $connection->query($query_user_role);
+			
+		}
+		else
+		{
+			//Update user last login
+			$query_update_user_last_login = "UPDATE tbl_users SET last_login_date=now() WHERE active_user=1 AND id_user=".$_user_id;
+			$result_update_user_last_login = $connection->query($query_update_user_last_login);
+			
+		}
 	
-	/*
 	
-	print "<pre>\n";
-	print "Raw POST Parameters:\n\n";
-	foreach($_POST as $key => $value ) {
-		print "$key=$value\n";
+		makeUserALoggedInUser($connection, $_POST["lis_person_contact_email_primary"]);
+		
 	}
-	print "</pre>";
-*/
+
 	
 	$query_select_lrs_teacher= "SELECT lrs_details.endpoint_url, lrs_details.username, lrs_details.password FROM lrs_details INNER JOIN match_course_lrs ON lrs_details.id = match_course_lrs.lrs_id  WHERE match_course_lrs.course_id = ".$_GET['course_id'];	
 	
@@ -309,15 +348,15 @@
 		{
 			if($_GET['preview']=="twocol")
 			{    
-    
-				echo '<div id="twocols" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 400px;">';
+				
+				echo '<div id="twocols" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">';
 				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
 				{
 					?>
 					<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 					<?php
 				}
-				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px; height: inherit;"  > ';
+				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px;    height: inherit;"  > ';
 				echo "<div style=\"height:inherit; overflow:scroll;\">";
 				
 				printCoursePart($connection, $_GET['course_id'],"twocol", 0,$url_iframe); //printModule Content in left part column
@@ -334,7 +373,7 @@
 				echo "</div>";
 				echo "</div>";
 				//Now print right column with interaction parts
-				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px;  height: inherit;" >';
+				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px;    height: inherit;" >';
 				echo "<div style=\"height:inherit; overflow:scroll;\">";
 				for($i=0; $i<$count_list;$i++)
 				{
@@ -532,10 +571,12 @@ var showFullScreen = function (object){
 }*/
 function twoSectionsDiv() {
 		if ($('#footer').is(':visible') ){
-			$('#twocols').height($(window).height() - $('#footer').height() - $('#twocols').offset().top-100 );
+			//$('#twocols').height($(window).height() - $('#footer').height() - $('#twocols').offset().top-100);
+			$('#twocols').height($(window).height() +200);
 		}else{
 		
-			$('#twocols').height($(window).height()  - $('#twocols').offset().top );
+			//$('#twocols').height($(window).height()  - $('#twocols').offset().top );
+			$('#twocols').height($(window).height())+200;
 		}
 	}
 /*
@@ -753,5 +794,51 @@ function printLRMIInfoBlock( $row ){
 
 	<?php
 }
+
+
+function makeUserALoggedInUser($connection, $email){
+	$result_check_mail_query = "SELECT * FROM tbl_users WHERE email_user = '".$email."'";	
+	$result = $connection->query($result_check_mail_query) or die("Error in query.." . mysqli_error($connection));
+	$row = mysqli_fetch_array($result);
+	$_SESSION['AUTHENTICATION'] = true;
+	$_SESSION['SESSION'] = true;
+	$_SESSION['USERID'] = $row['id_user'];
+	$_SESSION['EMAIL'] = $row['email_user'];
+	$_SESSION['FNAME'] = $row['name_user'];
+	$_SESSION['LNAME'] = $row['surname_user'];
+	$_SESSION['UROLE'] = "";
+	$_SESSION['UROLE_ID'] = "";
+	$Select_user_role_query="SELECT tbl_role.name_role,tbl_role.id_role FROM tbl_role INNER JOIN tbl_user_role ON tbl_role.id_role=tbl_user_role.id_role WHERE tbl_user_role.id_user=". $row['id_user'];	
+	//$result_user_role = mysql_query($Select_user_role_query);
+	$result_user_role = $connection->query($Select_user_role_query)  or die("Error in query.. result_user_role" . mysqli_error($connection));
+	$count_roles=0;
+	//while($row1 = mysql_fetch_array($result_user_role)){
+	while($row1 = $result_user_role->fetch_array()){
+		if($count_roles>0)
+		{
+			$_SESSION['UROLE'] .= "/".$row1[0];	
+			$_SESSION['UROLE_ID'] .= "/".$row1[1];
+		}
+		else
+		{
+			$_SESSION['UROLE'] .= $row1[0];	
+			$_SESSION['UROLE_ID'] .= $row1[1];
+			
+		}
+		$count_roles++;
+	}
+	
+	?>
+		<style>
+			#FORGEBoxHeaderMenuLogo{display:none !important;}
+			#FORGEBoxHeaderMenu{display:none !important;}
+			#disqus_thread{display:none !important;}
+			#footer{display:none !important;}
+		</style>
+		
+		<?php
+	
+}
+
 
 ?>
