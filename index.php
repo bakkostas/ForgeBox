@@ -17,17 +17,10 @@ if(!isset($_SESSION["UROLE_ID"]) OR ($_SESSION["UROLE_ID"]==7)) {
 <section id="headermain" >
 	<div class="container">
 		<div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h1>&nbsp;</h1>
 			<h1>Learn by experimenting on real hardware!</h1>
 			<p>Interactive Courses with Real Infrastructures! Access, create and share interactive courses with widgets accessing real infrastructures and resources available from <a href="http://www.ict-fire.eu/">FIRE</a> testbeds across Europe! 
-			</p>
-			<h1>&nbsp;</h1>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<h1>&nbsp;</h1>
-			<h1>Connect your course with Moodle LMS!</h1>
-			<p>Organize your course with interactive parts from Moodle LMS<a href="http://www.forgebox.eu/fb" target="_blank">If you want to see a demo press here</a>. 
 			</p>
 			<h1>&nbsp;</h1>
 			</div>
