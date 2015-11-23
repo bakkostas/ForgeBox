@@ -29,7 +29,7 @@
 
  <script>
     
-    var repoMarketplaceURL = 'http://www.forgebox.eu:443/baker/services/api/repo/fireadapters';
+    var repoMarketplaceURL = 'http://www.forgestore.eu:8080/fsapi/services/api/repo/fireadapters';
     //var bakerURLatFORGEBoxInstall = 'http://localhost:13000';
 	var bakerURLatFORGEBoxInstall = 'http://www.forgebox.eu:443';
     
