@@ -322,8 +322,10 @@
 									<br />
 									<div class="row">
 										<div class="form-group col-md-8">
-											<label for="InputURL">iframe Height :</label>
-											<input class="form-control" type="text" placeholder="typeiframeheight" id="item_iframe_height" name="item_iframe_height" value="<?php if(isset($iframe_height)){ echo $iframe_height; } ?>" ></input>
+											<label for="InputURL">iframe Height <a href="#" data-toggle="tooltip" data-placement="top" title="If the field is empty the frame height by default is 450 px. If you want to give specific height type for e.g. 600 for 600 px.">(<i class="fa fa-info"></i>)</a> :</label>
+											<input class="form-control" type="text" placeholder="Type Widget frame height" id="item_iframe_height" name="item_iframe_height" value="<?php if(isset($iframe_height)){ echo $iframe_height; } ?>" ></input><script>$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})</script>
 										</div>
 									</div>
 									
