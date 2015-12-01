@@ -26,7 +26,7 @@
 		{
 			$query_insert_course = "INSERT INTO tbl_courses(title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language,".
 			"about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, "."
-			learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous,create_uid,interactive_category,interactive_item,interactive_url) VALUES ('".
+			learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous,create_uid,interactive_category,interactive_item,interactive_url,iframe_height) VALUES ('".
 			mysql_real_escape_string($_POST["title"])."','".
 			mysql_real_escape_string($_POST["sdescription"])."','".
 			mysql_real_escape_string($_POST["content"])."',".
@@ -35,7 +35,7 @@
 			$_POST["publisher"]."','".
 			$_POST["language"]."','".
 			$_POST["about"]."','".$_POST["alignmentType"]."','".$_POST["educationalFramework"]."','".$_POST["targetName"]."','".$_POST["targetDescription"]."','".
-			$_POST["targetURL"]."','".$_POST["educationalUse"]."','".$_POST["duration"]."','".$_POST["typicalAgeRange"]."','".$_POST["interactivityType"]."','".$_POST["learningResourseType"]."','".$_POST["licence"]."','".$_POST["isBasedOnURL"]."','".$_POST["educationalRole"]."','".$_POST["audienceType"]."',".$active.",".$publish_to_anonymous.",".$_SESSION["USERID"].",".$_POST["select_interactive_part"].",".$_POST["select_interactive_item"].",'".$_POST["item_url"]."')";
+			$_POST["targetURL"]."','".$_POST["educationalUse"]."','".$_POST["duration"]."','".$_POST["typicalAgeRange"]."','".$_POST["interactivityType"]."','".$_POST["learningResourseType"]."','".$_POST["licence"]."','".$_POST["isBasedOnURL"]."','".$_POST["educationalRole"]."','".$_POST["audienceType"]."',".$active.",".$publish_to_anonymous.",".$_SESSION["USERID"].",".$_POST["select_interactive_part"].",".$_POST["select_interactive_item"].",'".$_POST["item_url"]."','".$_POST["item_iframe_height"]."')";
 		}
 		else
 		{
@@ -121,7 +121,7 @@
 			$_POST["typicalAgeRange"]."',interactivityType='".$_POST["interactivityType"]."',learningResourseType='".$_POST["learningResourseType"].
 			"',licence='".$_POST["licence"]."',isBasedOnURL='".$_POST["isBasedOnURL"]."',educationalRole='".$_POST["educationalRole"]."',audienceType='".
 			$_POST["audienceType"]."',active=".$active.",publish_to_anonymous=".$publish_to_anonymous.",interactive_category=".$_POST["select_interactive_part"].
-			",interactive_item=".$_POST["select_interactive_item"].", interactive_url='".$_POST["item_url"]."' WHERE id=".$_GET["id"];		
+			",interactive_item=".$_POST["select_interactive_item"].", interactive_url='".$_POST["item_url"]."', iframe_height='".$_POST["item_iframe_height"]."' WHERE id=".$_GET["id"];		
 		}
 		else
 		{
@@ -186,7 +186,7 @@
 			$query_select = " AND create_uid=".$_SESSION['USERID'];
 		}
 			
-		$query_select_mycourse= "SELECT title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous, create_uid,interactive_category,interactive_item,interactive_url FROM tbl_courses WHERE id =".$_GET['id'].$query_select;
+		$query_select_mycourse= "SELECT title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous, create_uid,interactive_category,interactive_item,interactive_url, iframe_height  FROM tbl_courses WHERE id =".$_GET['id'].$query_select;
 		$result_select_mycourse = $connection->query($query_select_mycourse);
 		
 		if($result_select_mycourse->num_rows == 0)
@@ -229,7 +229,7 @@
 			$interactive_category = $row[27];
 			$interactive_item = $row[28];
 			$interactive_url = $row[29];
-			
+			$iframe_height = $row[30];
 		}
 	}
  
@@ -319,6 +319,14 @@
 											<input class="form-control" type="text" placeholder="typeURL" id="item_url" name="item_url" value="<?php if(isset($interactive_url)){ echo $interactive_url; } ?>" ></input>
 										</div>
 									</div>
+									<br />
+									<div class="row">
+										<div class="form-group col-md-8">
+											<label for="InputURL">iframe Height :</label>
+											<input class="form-control" type="text" placeholder="typeiframeheight" id="item_iframe_height" name="item_iframe_height" value="<?php if(isset($iframe_height)){ echo $iframe_height; } ?>" ></input>
+										</div>
+									</div>
+									
 									<?php
 								}								
 								?>

@@ -68,7 +68,7 @@
 	if(isset($_GET['course_id']))
 	{
 	
-		$query_select= "SELECT title, author, create_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, content, interactive_url, publish_to_anonymous FROM tbl_courses WHERE tbl_courses.id = ".$_GET['course_id'];//." AND course_item_id=1";
+		$query_select= "SELECT title, author, create_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, content, interactive_url, publish_to_anonymous, iframe_height FROM tbl_courses WHERE tbl_courses.id = ".$_GET['course_id'];//." AND course_item_id=1";
 		
 		$result_select = $connection->query($query_select);
 		
@@ -96,6 +96,7 @@
 			$content=$row1[20];
 			$interactive_url=$row1[21];
 			$publish_to_anonymous = $row1[22];
+			$iframe_height = $row1[23];
 		}
 		$lrs_object_name = $title_course;
 		if($publish_to_anonymous == 0 && $urole_id==7 )
@@ -669,7 +670,7 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid , $u
 	
 	$query_select_present= "SELECT title, content, author, create_date, publisher, language, about, alignmentType, educationalFramework, ".
 	"targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, ".
-	"isBasedOnURL, educationalRole, audienceType, interactive_url FROM tbl_courses WHERE id=".$course_id;
+	"isBasedOnURL, educationalRole, audienceType, interactive_url, iframe_height FROM tbl_courses WHERE id=".$course_id;
 	
 	$result_select_present = $connection->query($query_select_present);
 	if($issectionparts=="section")
@@ -710,7 +711,12 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid , $u
 		}
 		if ($row[21]){
 			echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';	
-			echo "<iframe width=\"100%\" height=\"450px\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21].$url_iframe."\"></iframe>";	
+			if(!empty($row[22])){
+			echo "<iframe width=\"100%\" height=\"".$row[22]."\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21].$url_iframe."\"></iframe>";	
+			}
+			else{
+			echo "<iframe width=\"100%\" height=\"450px\" style=\"border-right: 1px dotted navy; border-style: dotted; border-color: navy; border-width: 1px;\"  src=\"".$row[21].$url_iframe."\"></iframe>";		
+			}
 			echo "</div><!-- end col-sm-12 div-->";
 		}
 		
