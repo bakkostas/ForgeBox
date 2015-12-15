@@ -52,7 +52,8 @@
 				</div>
 				<br />
 				<?php
-					if($_SESSION['UROLE']=="Administrator"){
+				
+					if(strpos($_SESSION['UROLE'],"Administrator")!== false){
 						$table_owner = "<td class=\"sort\">Course Owner</td>";
 					}else{
 						$table_owner = "";
@@ -85,7 +86,7 @@
 							$course_categories .= $row_cat[0]."<br>";			
 						}
 		
-						if($_SESSION['UROLE']=="Administrator"){
+						if(strpos($_SESSION['UROLE'],"Administrator")!== false){
 							$table_owner_email = "<td class=\"email\">".$row[4]."</td>";
 						}else{
 							$table_owner_email = "";
