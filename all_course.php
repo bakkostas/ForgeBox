@@ -52,7 +52,10 @@
 				</div>
 				<br />
 				<?php
-					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td><td width=\"25%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\">Preview</td></tr>";
+					if($_SESSION['UROLE']=="Administrator"){
+						$table_owner = "<td class=\"sort\">Course Owner</td>";
+					}
+					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td>".$table_owner."<td width=\"10%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\">Preview</td></tr>";
 	
 					$table_data .= "<tbody class=\"list\">";
 					
@@ -65,7 +68,7 @@
 					{
 						$if_anonymous_query="";
 					}
-					$query_select_mycourse= "SELECT id, title, sdescription, author FROM tbl_courses WHERE course_item_id=1 AND active=1".$if_anonymous_query." GROUP BY title";	
+					$query_select_mycourse= "SELECT tbl_courses.id, tbl_courses.title, tbl_courses.sdescription, tbl_courses.author, tbl_users.email_user FROM tbl_courses INNER JOIN tbl_users ON tbl_courses.create_uid = tbl_users.id_user WHERE course_item_id=1 AND active=1".$if_anonymous_query." GROUP BY title";	
 					$result_select_mycourse = $connection->query($query_select_mycourse);
 	
 					while($row = $result_select_mycourse->fetch_array()){
@@ -81,7 +84,7 @@
 						}
 		
 
-						$table_data .="<tr style=\"height:30px;\"><td><a href=\"preview_course.php?course_id=".$row[0].$url_lrs_endpoint."\" class=\"name\">".$row[1]."</a></td><td class=\"author\">".$row[3]."</td><td class=\"right category\">".$course_categories."</td>";
+						$table_data .="<tr style=\"height:30px;\"><td><a href=\"preview_course.php?course_id=".$row[0].$url_lrs_endpoint."\" class=\"name\">".$row[1]."</a></td><td class=\"author\">".$row[3]."</td><td class=\"email\">".$row[4]."</td><td class=\"right category\">".$course_categories."</td>";
 						
 						$query_select_files= "SELECT has_scorm, has_epub FROM store_scorm_epub WHERE course_id=".$row[0];
 			
@@ -111,7 +114,7 @@
 							
 						$table_data .="<td class=\"right\">".$course_files."</td>";
 						//$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].'&endpoint=http%3A%2F%2F192.168.164.128%2Fdata%2FxAPI%2F&auth=Basic%20Yzg4ZTQ2YjUyYWMyMTRkMzQ4ZWIyNmE1YTQ0NTI0MzM0YzU5ZDliMjoxZTJiYjlmYjcxZDEyYmIwMWE5YjY3ZTRmOGY1OTZkZTU1NDI3NThk&actor=%7B&quot;mbox&quot;%3A%5B&quot;mailto%3Akostas.bakoulias%40gmail.com&quot;%5D%2C&quot;name&quot;%3A%5B&quot;'.$_SESSION['FNAME'].'&quot;%5D%7D" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
-						$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].'" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
+						$table_data .='<td class="right"><center><a href="preview_course.php?course_id='.$row[0].'" \"><i class="glyphicon glyphicon-eye-open"></i></a></center></td>';
 						$table_data .="</tr>";
 		
 					}
