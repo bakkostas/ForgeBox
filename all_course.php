@@ -54,8 +54,10 @@
 				<?php
 					if($_SESSION['UROLE']=="Administrator"){
 						$table_owner = "<td class=\"sort\">Course Owner</td>";
+					}else{
+						$table_owner = "";
 					}
-					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td>".$table_owner."<td width=\"10%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\">Preview</td></tr>";
+					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td>".$table_owner."<td width=\"10%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\"><center>Preview</center></td></tr>";
 	
 					$table_data .= "<tbody class=\"list\">";
 					
@@ -83,8 +85,13 @@
 							$course_categories .= $row_cat[0]."<br>";			
 						}
 		
-
-						$table_data .="<tr style=\"height:30px;\"><td><a href=\"preview_course.php?course_id=".$row[0].$url_lrs_endpoint."\" class=\"name\">".$row[1]."</a></td><td class=\"author\">".$row[3]."</td><td class=\"email\">".$row[4]."</td><td class=\"right category\">".$course_categories."</td>";
+						if($_SESSION['UROLE']=="Administrator"){
+							$table_owner_email = "<td class=\"email\">".$row[4]."</td>";
+						}else{
+							$table_owner_email = "";
+							
+						}
+						$table_data .="<tr style=\"height:30px;\"><td><a href=\"preview_course.php?course_id=".$row[0].$url_lrs_endpoint."\" class=\"name\">".$row[1]."</a></td><td class=\"author\">".$row[3]."</td>".$table_owner_email."<td class=\"right category\">".$course_categories."</td>";
 						
 						$query_select_files= "SELECT has_scorm, has_epub FROM store_scorm_epub WHERE course_id=".$row[0];
 			
