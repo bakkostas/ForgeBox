@@ -1,8 +1,12 @@
 <?php
 	ini_set('session.cookie_path', ''); //fixes installation on other paths
 	
+	session_set_cookie_params(86400,"/");
+	
 	session_start();
-
+	
+  
+  
 	//include "conf.php";
 	
 	//if (!isset($_SESSION['SESSION'])) include ( "session_init.php");
@@ -69,6 +73,5 @@
 		$_SESSION['UROLE_ID'] = 7;
 	}
 	
-
 	
 ?>
