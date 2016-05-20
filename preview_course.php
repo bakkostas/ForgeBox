@@ -513,141 +513,143 @@
 
 
 <div class="row">
-	<!-- AddToAny BEGIN -->
-	<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-		<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-		<a class="a2a_button_facebook"></a>
-		<a class="a2a_button_twitter"></a>
-		<a class="a2a_button_google_plus"></a>
+	<div class="container">
+		<!-- AddToAny BEGIN -->
+		<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+			<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+			<a class="a2a_button_facebook"></a>
+			<a class="a2a_button_twitter"></a>
+			<a class="a2a_button_google_plus"></a>
+		</div>
+		<script async src="https://static.addtoany.com/menu/page.js"></script>
+		<!-- AddToAny END -->
 	</div>
-	<script async src="https://static.addtoany.com/menu/page.js"></script>
-	<!-- AddToAny END -->
 </div>
 
 <div class="row" style="padding-top:20px; padding-bottom:20px;">
-
-	<main class="o-content">
-		<div class="">
-			<div class="o-section">
-				<div id="shop" style="border-style: dotted; border-color: navy; border-width: 2px; margin: 15px;"></div>
+	<div class="container">
+		<main class="o-content">
+			<div class="">
+				<div class="o-section">
+					<div id="shop" style="border-style: dotted; border-color: navy; border-width: 2px; margin: 15px;"></div>
+				</div>
+				<div class="o-section">
+					<div id="github-icons"></div>
+				</div>
 			</div>
-			<div class="o-section">
-				<div id="github-icons"></div>
-			</div>
-		</div>
-	</main>
+		</main>
 
 
-	<script src="js/dist/rating.min.js"></script>
-	<script>
+		<script src="js/dist/rating.min.js"></script>
+		<script>
 
-	var user_id = "<?php echo $_SESSION['USERID']; ?>";
-	var course_id = "<?php echo $_GET['course_id']; ?>";
-	var data_post1;	
-	/**
-	* Demo in action!
-	*/
-	(function() {
+		var user_id = "<?php echo $_SESSION['USERID']; ?>";
+		var course_id = "<?php echo $_GET['course_id']; ?>";
+		var data_post1;	
+		/**
+		* Demo in action!
+		*/
+		(function() {
 
-		'use strict';
+			'use strict';
 
-  
-		// SHOP ELEMENT
-		var shop = document.querySelector('#shop');
+	  
+			// SHOP ELEMENT
+			var shop = document.querySelector('#shop');
 
-		// DUMMY DATA
-		var data = [
-			{
-				title: "Please give us a rating :",
-				description: "",
-				rating: 0
+			// DUMMY DATA
+			var data = [
+				{
+					title: "Please give us a rating :",
+					description: "",
+					rating: 0
+				}
+			];
+
+			// INITIALIZE
+			(function init() {
+				for (var i = 0; i < data.length; i++) {
+					addRatingWidget(buildShopItem(data[i]), data[i]);
+				}
+			})();
+
+			// BUILD SHOP ITEM
+			function buildShopItem(data) {
+				var shopItem = document.createElement('div');
+
+				var html = '<div class="c-shop-item__details">' +
+					'<h3 class="c-shop-item__title">' + data.title + '</h3>' +
+					'<p class="c-shop-item__description">' + data.description + '</p>' +
+					'<ul class="c-rating"></ul>' +
+					'</div>';
+
+				shopItem.classList.add('c-shop-item');
+				shopItem.innerHTML = html;
+				shop.appendChild(shopItem);
+
+				return shopItem;
 			}
-		];
-
-		// INITIALIZE
-		(function init() {
-			for (var i = 0; i < data.length; i++) {
-				addRatingWidget(buildShopItem(data[i]), data[i]);
+	  
+	   
+			// ADD RATING WIDGET
+			function addRatingWidget(shopItem, data) {
+			
+				var ratingElement = shopItem.querySelector('.c-rating');		
+				var currentRating = data.rating;
+				var maxRating = 5;
+				var callback = function(rating) { 
+					if(user_id==0 || course_id==null){
+						alert("You have must register to rate the course!");
+						error_msg();
+						return false;
+					}  
+					else{
+						var data_post ='';
+			 
+						data_post += 'user_id='+user_id;
+						data_post += '&course_id='+course_id;
+						data_post += '&score='+rating;
+			
+						//data_post1 = data_post;
+						insert_rate(data_post);
+		 
+					}
+				};
+			
+				var r = rating(ratingElement, currentRating, maxRating, callback);
 			}
+
 		})();
-
-		// BUILD SHOP ITEM
-		function buildShopItem(data) {
-			var shopItem = document.createElement('div');
-
-			var html = '<div class="c-shop-item__details">' +
-				'<h3 class="c-shop-item__title">' + data.title + '</h3>' +
-				'<p class="c-shop-item__description">' + data.description + '</p>' +
-				'<ul class="c-rating"></ul>' +
-				'</div>';
-
-			shopItem.classList.add('c-shop-item');
-			shopItem.innerHTML = html;
-			shop.appendChild(shopItem);
-
-			return shopItem;
+	  
+	  
+		function error_msg(){
+			$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
+			$("<div class=\"alert alert-danger\" role=\"alert\">You must register to rate the course!</div>").insertAfter(".c-rating");
 		}
-  
-   
-		// ADD RATING WIDGET
-		function addRatingWidget(shopItem, data) {
 		
-			var ratingElement = shopItem.querySelector('.c-rating');		
-			var currentRating = data.rating;
-			var maxRating = 5;
-			var callback = function(rating) { 
-				if(user_id==0 || course_id==null){
-					alert("You have must register to rate the course!");
-					error_msg();
-					return false;
-				}  
-				else{
-					var data_post ='';
-         
-					data_post += 'user_id='+user_id;
-					data_post += '&course_id='+course_id;
-					data_post += '&score='+rating;
-        
-     				//data_post1 = data_post;
-					insert_rate(data_post);
-     
+		
+		
+		function insert_rate(data_post1){
+			$.ajax({
+				type: "POST",
+				url: "functions/insert_rating.php",
+				data: data_post1,
+				dataType: "json",
+				success: function(msg){
+					if(msg.status == 1){
+						$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
+						$("<div class=\"alert alert-success\" role=\"alert\">"+msg.txt+"</div>").insertAfter(".c-rating");
+					}
+					else{
+						$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
+						$("<div class=\"alert alert-danger\" role=\"alert\">"+msg.txt+"</div>").insertAfter(".c-rating");
+					}
 				}
-			};
-		
-			var r = rating(ratingElement, currentRating, maxRating, callback);
+			});
 		}
-
-	})();
-  
-  
-	function error_msg(){
-		$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
-		$("<div class=\"alert alert-danger\" role=\"alert\">You must register to rate the course!</div>").insertAfter(".c-rating");
-	}
-    
-    
-    
-	function insert_rate(data_post1){
-		$.ajax({
-			type: "POST",
-			url: "functions/insert_rating.php",
-			data: data_post1,
-			dataType: "json",
-			success: function(msg){
-				if(msg.status == 1){
-					$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
-					$("<div class=\"alert alert-success\" role=\"alert\">"+msg.txt+"</div>").insertAfter(".c-rating");
-				}
-				else{
-					$( ".alert-danger" ).remove();$( ".alert-success" ).remove();
-					$("<div class=\"alert alert-danger\" role=\"alert\">"+msg.txt+"</div>").insertAfter(".c-rating");
-				}
-			}
-  	    });
-	}
-   
-</script>
-
+	   
+	</script>
+	</div>
 
 </div>
 
