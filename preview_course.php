@@ -599,7 +599,7 @@
 				var maxRating = 5;
 				var callback = function(rating) { 
 					if(user_id==0 || course_id==null){
-						alert("You have must register to rate the course!");
+						//alert("You have must register to rate the course!");
 						error_msg();
 						return false;
 					}  
