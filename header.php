@@ -128,7 +128,9 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
     <!-- <script src="../lib/jquery-1.9.1.min.js"></script> -->
     <!-- <script src="js/jquery.cookie-1.3.1.js"></script>
     <script src="js/jquery.steps.js"></script> -->
-	
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/rating.min.css">
 	
 	<style type="text/css">
 		.black, .black a {
