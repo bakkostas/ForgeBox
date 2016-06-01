@@ -273,7 +273,7 @@
 		
 		var monkeyList = new List('test-list', {
 		  valueNames: ['name','category','author'],
-		  page: 10,
+		  page: 25,
 		  plugins: [ ListPagination({}) ] 
 		});
 		
