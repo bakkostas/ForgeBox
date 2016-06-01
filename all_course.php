@@ -58,7 +58,7 @@
 					}else{
 						$table_owner = "";
 					}
-					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td>".$table_owner."<td width=\"10%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\"><center>Preview</center></td></tr>";
+					$table_data = "<table width=\"100%\" style=\"border: 1px solid #efefef;\"><tr style=\"font-size:16px; background-color:#f5f5f5;height:30px;\"><td class=\"sort\" width=\"30%\" data-sort=\"name\">Title</td><td class=\"sort\" width=\"20%\" data-sort=\"author\">Author/Owner</td>".$table_owner."<td width=\"10%\" class=\"sort\" data-sort=\"category\">Category</td><td class=\"sort\">Files</td><td class=\"sort\"><center>Preview</center></td><td class=\"sort\"><center>Rate</center></td></tr>";
 	
 					$table_data .= "<tbody class=\"list\">";
 					
@@ -123,6 +123,132 @@
 						$table_data .="<td class=\"right\">".$course_files."</td>";
 						//$table_data .='<td class="right"><a href="preview_course.php?course_id='.$row[0].'&endpoint=http%3A%2F%2F192.168.164.128%2Fdata%2FxAPI%2F&auth=Basic%20Yzg4ZTQ2YjUyYWMyMTRkMzQ4ZWIyNmE1YTQ0NTI0MzM0YzU5ZDliMjoxZTJiYjlmYjcxZDEyYmIwMWE5YjY3ZTRmOGY1OTZkZTU1NDI3NThk&actor=%7B&quot;mbox&quot;%3A%5B&quot;mailto%3Akostas.bakoulias%40gmail.com&quot;%5D%2C&quot;name&quot;%3A%5B&quot;'.$_SESSION['FNAME'].'&quot;%5D%7D" \"><i class="glyphicon glyphicon-eye-open"></i></a></td>';
 						$table_data .='<td class="right"><center><a href="preview_course.php?course_id='.$row[0].'" \"><i class="glyphicon glyphicon-eye-open"></i></a></center></td>';
+						
+						
+						
+						
+						
+             $avg_rate=0;
+            $query_select_courses_rate= "SELECT COUNT(id) , SUM(score_val) FROM course_rating WHERE course_id=".$row[0];
+            $result_select_course_rate = $connection->query($query_select_courses_rate)  or die("Error in query.." . mysqli_error($connection));
+            
+            while($row_score = $result_select_course_rate->fetch_array()){
+               if($row_score[0]>0){
+               $avg_rate = $row_score[1]/$row_score[0];
+               }
+               else{
+               $avg_rate='N/A';
+               }
+           }
+            
+            
+            if($avg_rate!='N/A'){
+              if($avg_rate>0 && $avg_rate<1){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate===1){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate>1 && $avg_rate <2 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate===2 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate>2 && $avg_rate <3 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate===3 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate>3 && $avg_rate <4 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate===4 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate>4 && $avg_rate <5 ){$table_data .= '<td><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+              else if($avg_rate===5 ){$table_data .= '<td ><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
+            
+            }else{
+            $table_data .= '<td><center>Rate not Available</center></td>';
+      }
+            
+            
+            if($avg_rate!='N/A'){
+     $score1=0;
+    $score2=0;
+    $score3=0;
+    $score4=0;
+    $score5=0;
+    
+    
+     $query_select_courses_rate5= "SELECT COUNT( id )FROM course_rating WHERE score_val=5 && course_id=".$row[0];
+     $result_select_course_rate5 = $connection->query($query_select_courses_rate5)  or die("Error in query.." . mysqli_error($connection));
+    
+	  while($row_score5 = $result_select_course_rate5->fetch_array()){
+       $score5=$row_score5[0];
+     }
+   
+    $query_select_courses_rate4= "SELECT COUNT( id )FROM course_rating WHERE score_val=4 && course_id=".$row[0];
+     $result_select_course_rate4 = $connection->query($query_select_courses_rate4)  or die("Error in query.." . mysqli_error($connection));
+    
+	  while($row_score4 = $result_select_course_rate4->fetch_array()){
+       $score4=$row_score4[0];
+     }
+     
+      $query_select_courses_rate3= "SELECT COUNT( id )FROM course_rating WHERE score_val=3 && course_id=".$row[0];
+     $result_select_course_rate3 = $connection->query($query_select_courses_rate3)  or die("Error in query.." . mysqli_error($connection));
+    
+	  while($row_score3 = $result_select_course_rate3->fetch_array()){
+       $score3=$row_score3[0];
+     }
+     
+      $query_select_courses_rate2= "SELECT COUNT( id )FROM course_rating WHERE score_val=2 && course_id=".$row[0];
+     $result_select_course_rate2 = $connection->query($query_select_courses_rate2)  or die("Error in query.." . mysqli_error($connection));
+    
+	  while($row_score2 = $result_select_course_rate2->fetch_array()){
+       $score2=$row_score2[0];
+     }
+     
+      $query_select_courses_rate1= "SELECT COUNT( id )FROM course_rating WHERE score_val=1 && course_id=".$row[0];
+     $result_select_course_rate1 = $connection->query($query_select_courses_rate1)  or die("Error in query.." . mysqli_error($connection));
+    
+	  while($row_score1 = $result_select_course_rate1->fetch_array()){
+       $score1=$row_score1[0];
+     }
+   
+     
+ echo '
+	  <div class="modal fade" id="myModal_'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Rate for course : '.$row['title'].'</h4>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <td>&nbsp;&nbsp;-&nbsp;&nbsp;'.$score1.'&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</td>
+            <td style="color:#B5B526;text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;-&nbsp;&nbsp;'.$score2.'&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</td>
+            <td style="color:#B5B526;text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;-&nbsp;&nbsp;'.$score3.'&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</td>
+            <td style="color:#B5B526;text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;-&nbsp;&nbsp;'.$score4.'&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</td>
+            <td style="color:#B5B526;text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;-&nbsp;&nbsp;'.$score5.'&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</td>
+            <td style="color:#B5B526;text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-star" aria-hidden="true"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>';
+  
+  }
+						
+						
+						
+						
+						
+						
 						$table_data .="</tr>";
 		
 					}
