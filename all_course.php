@@ -155,7 +155,7 @@
               else if($avg_rate===5 ){$table_data .= '<td ><center><a href="" data-toggle="modal" data-target="#myModal_'.$row[0].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </center></td>';}
             
             }else{
-            $table_data .= '<td><center>Rate not Available</center></td>';
+            $table_data .= '<td><center><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></center></td>';
       }
             
             
