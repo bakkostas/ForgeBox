@@ -409,7 +409,7 @@
 				}
 			
 				echo '
-					<div class="modal fade" id="myModal_'.$row['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal fade" id="myModal_'.$_GET['course_id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
