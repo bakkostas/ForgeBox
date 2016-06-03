@@ -183,7 +183,7 @@ else{
 				success: function(msg){				
 						//	hideshow('loading',0);	
 						
-					
+						alert(msg.txt);
 						$("#notificatio_msg").html("");
 						$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 						

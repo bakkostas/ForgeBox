@@ -2,7 +2,6 @@
 
 	
 	include "conf.php";
-	include "session.php";
 	
 	
 	die(msg(1,$_POST['mail']));
