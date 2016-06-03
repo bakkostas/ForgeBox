@@ -10,7 +10,7 @@
 			
 			
 			
-			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_POST['email'];
+			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user='".$_POST['email']."'";
 			$result_select_uid = $connection->query($query_select_uid);
 			$uid =0;
 			while($row = $result_select_uid->fetch_array())
