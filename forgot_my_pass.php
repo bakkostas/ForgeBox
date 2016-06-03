@@ -167,13 +167,12 @@ else{
 				 errNew = false;
 				}
 				
-				alert(errNew);
-
+				
 
 		if((!errNew)){
 			
 			var formChPass = "newpass="+newpass+"&actnum=<?php echo $_GET["actnum"]; ?>&mail=<?php echo $_GET["mail"]; ?>";
-			alert(formChPass);
+	
 			
 			$.ajax({
 				type: "POST",

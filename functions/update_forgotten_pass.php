@@ -4,7 +4,8 @@
 	include "conf.php";
 	
 	
-	die(msg(1,$_POST['mail']));
+	die(msg(1,"dfg"));
+	
 	if(isset($_POST['mail']))
 	{
 		if(!empty($_POST['mail'])){
@@ -35,7 +36,13 @@
 			}
 			
 		}
+		else{
+			die(msg(1,"The email doesn't exist! Please try again!"));
+		}
 
+	}
+	else{
+		die(msg(1,"The email doesn't exist! Please try again!"));
 	}
 	
 	
