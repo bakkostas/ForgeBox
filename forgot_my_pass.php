@@ -69,7 +69,7 @@ $('#btnsubmit').click(function(){
 		formData = $('#email').val();		
 			
 		if(formData != ''){
-			
+			alert('wwqe');
 			
 			$.ajax({
 				type: "POST",
