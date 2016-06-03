@@ -65,6 +65,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 									<a href="agreement.php">I agree</a>
 								</label>
 							</div>
+							<p id="notification_msg"></p>
 							<input type="submit" id="uDetSbmt" onclick="return false;" value="Submit">
 							<input type="reset" value="Reset">
 						</form>
@@ -175,8 +176,10 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 				//First Name validator
 					var fn = document.forms["user_detail"]["firstname"].value;
 					if (fn == null || fn == "") {
-						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "First name must be filled out",
-					timeout: 5000});
+						$("#notification_msg").html("");
+						$("#notification_msg").append("<span style=\"color:red;\">First name must be filled out</span>");
+						
+						//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "First name must be filled out",timeout: 5000});
 						//return false;
 						errName = true;
 					}else{
@@ -186,8 +189,12 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					//Last Name validator
 				   var fn = document.forms["user_detail"]["lastname"].value;
 					if (fn == null || fn == "") {
-						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Last name must be filled out",
-					timeout: 5000});
+						
+						$("#notification_msg").html("");
+						$("#notification_msg").append("<span style=\"color:red;\">Last name must be filled out</span>");
+						
+						//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Last name must be filled out",timeout: 5000});
+						
 						errSur = true;
 					}else{
 						errSur = false;
@@ -198,8 +205,12 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					var atpos = x.indexOf("@");
 					var dotpos = x.lastIndexOf(".");
 					if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-						$.Notify({caption:'Error Email',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Not a valid e-mail address",
-						timeout: 5000});
+						
+						$("#notification_msg").html("");
+						$("#notification_msg").append("<span style=\"color:red;\">Not a valid e-mail address</span>");
+						
+						//$.Notify({caption:'Error Email',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Not a valid e-mail address",timeout: 5000});
+						
 						errMail = true;
 					}else{
 						errMail = false;
@@ -225,9 +236,9 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					});
 					}
 		}else{			
-			
-			$.Notify({caption:'Checkbox agreement',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "You have to agree with .... in order to take effect changes!",
-					timeout: 5000});						
+			$("#notification_msg").html("");
+			$("#notification_msg").append("<span style=\"color:red;\">You have to agree with .... in order to take effect changes!</span>");
+			//$.Notify({caption:'Checkbox agreement',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "You have to agree with .... in order to take effect changes!",timeout: 5000});						
 			
 		}
 		
@@ -236,7 +247,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 	
 	$('#uChPassSbmt').click(function(){
 		
-			alert('sdfsd');
+			
 			$("#notificatio_msg").html("");
 			
 			var oldpass = $('#oldpass').val();
