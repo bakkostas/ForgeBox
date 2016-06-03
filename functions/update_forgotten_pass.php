@@ -4,7 +4,8 @@
 	include "conf.php";
 	include "session.php";
 	
-
+	
+	die(msg(1,$_POST['mail']));
 	if(isset($_POST['mail']))
 	{
 		if(!empty($_POST['mail'])){
