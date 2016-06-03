@@ -139,7 +139,7 @@ $('#btnsubmit').click(function(){
 					$('#newpass').focus();
 					errNew = true;
 				  }
-				} else if (newpass != newpass2){
+				 if (newpass != newpass2){
 					
 					$("#notificatio_msg").html("");
 					$("#notificatio_msg").append("<span style=\"color:red;\">Error: New Password and confirmation New Password must match</span>");
