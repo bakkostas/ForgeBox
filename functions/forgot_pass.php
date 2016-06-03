@@ -40,10 +40,9 @@
 				$email_subject = $InstallationSite." Forgot Password ";
 				$email_body = 'Hi,<br /> Folow the link to change your password! <br /> <a href="http://www.forgebox.eu/fb/forgot_my_pass.php?actnum='.$updPass.'&mail='.$_POST['email'].'">Click here to change your password!</a> ';
 				$headers = "MIME-Version: 1.0" . "\r\n";
-				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-				$headers .= "From: \n".$myemail;
-				$headers .= "Reply-To: ".$myemail;
-				
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";				
+				$headers .= 'To: '. $to . "\r\n";
+				$headers .= 'From: Forgebox.eu <'. $myemail . "> \r\n";
 				mail($to,$email_subject,$email_body,$headers);
 				
 				die(msg(1,"You have an email in your mail account. Please follow the instuctions!"));
