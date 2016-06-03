@@ -5,11 +5,11 @@
 	include "session.php";
 	
 	
-	die(msg(1,"ok"));
+	die(msg(1,$_POST['email']));
 
-	if(isset($_GET['email']))
+	if(isset($_POST['email']))
 	{
-		if(!empty($_GET['email'])){
+		if(!empty($_POST['email'])){
 			
 			
 			
