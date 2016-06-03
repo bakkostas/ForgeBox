@@ -24,14 +24,14 @@
 				$$query_update_uid = "UPDATE tbl_users SET active_user=".$ative_number." WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
 				
-				$myemail = "info@forgebox.eu";
+				/*$myemail = "info@forgebox.eu";
 				
 				$to = $_POST['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
 				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_POST['email']."\">Click here to change your password!</a> ";
-				$headers = "From: $myemail\n";
-				$headers .= "Reply-To: $_POST['email']";
-				mail($to,$email_subject,$email_body,$headers);
+				$headers = "From: \n".$myemail;
+				$headers .= "Reply-To: ".$to;
+				mail($to,$email_subject,$email_body,$headers);*/
 				
 				die(msg(1,"You have an email in your mail account. Please follow the instuctions!"));
 				
