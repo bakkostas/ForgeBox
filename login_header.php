@@ -27,6 +27,9 @@
 					<br />	
 					</div>
 					</div>
+					<div class="row">
+						<a href="forgot_my_pass.php">Forgot my password!</a>
+					</div>
 					<div class="row" >
 						 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
                                                         <form action="https://www.forgebox.eu/fb/loginssaml.php" method="get">
