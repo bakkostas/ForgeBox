@@ -64,9 +64,17 @@ else{
 $('#btnsubmit').click(function(){
 		$("#notification_msg").html("");
 		
-		if($('#email').val() == ''){
-			var formData = $('#email').val();
+		var formData = $('#email').val();
+			
 			alert(formData);
+			
+			
+		if($('#email').val() == ''){
+			
+			var formData = $('#email').val();
+			
+			alert(formData);
+			
 			$.ajax({
 				type: "POST",
 				url: "functions/forgot_my_pass.php",
