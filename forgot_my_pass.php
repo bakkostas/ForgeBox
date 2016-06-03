@@ -6,7 +6,7 @@
 if(isset($_GET["actnum"]) && isset($_GET["mail"])){
 	if(!empty($_GET["actnum"]) && !empty($_GET["mail"]))
 	{
-		$query_select_uid = "SELECT id_user FROM tbl_users WHERE email_user='".$_GET["mail"]."' AND password_user=".$_GET["actnum"];
+		$query_select_uid = "SELECT id_user FROM tbl_users WHERE email_user='".$_GET["mail"]."' AND password_user='".$_GET["actnum"]."'";
 		$result_select_uid = $connection->query($query_select_uid);
 		$uid =0;
 		while($row = $result_select_uid->fetch_array())
