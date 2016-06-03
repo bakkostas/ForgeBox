@@ -42,7 +42,7 @@
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				$headers .= "From: \n".$myemail;
-				$headers .= "Reply-To: ".$to;
+				$headers .= "Reply-To: ".$myemail;
 				
 				mail($to,$email_subject,$email_body,$headers);
 				
