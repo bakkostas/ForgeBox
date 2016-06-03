@@ -167,7 +167,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 		return false;
 	});
 	$('#uDetSbmt').click(function(){
-	
+		$("#notification_msg").html("");
 		if($('#agreeckbx').is(':checked') == true){
 				
 				var errName=true;
@@ -230,7 +230,8 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 						url: "functions/edit_user_details.php",
 						data: formData,
 						success: function(msg){
-							
+							$("#notification_msg").html("");
+							$("#notification_msg").append("<span style=\"color:green;\">User details updated!</span>");
 							hideshow('loading',0);					
 						}						
 					});
