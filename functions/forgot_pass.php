@@ -24,10 +24,10 @@
 			
 			if($uid > 0){
 				
-				$ative_number = generateRandomString(6);
+				$ative_number = generateRandomString(5);
 				
 				
-				$$query_update_uid = "UPDATE tbl_users SET active_user=".$ative_number." WHERE id_user=".$uid;
+				$$query_update_uid = "UPDATE tbl_users SET active_user=".intval($ative_number)." WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
 				
 				/*$myemail = "info@forgebox.eu";
@@ -57,7 +57,7 @@
 		return '{"status":'.$status.',"txt":"'.$txt.'"}';
 	}
 	
-	function generateRandomString($length = 6) {
+	function generateRandomString($length = 5) {
 		$characters = '0123456789';
 		$charactersLength = strlen($characters);
 		$randomString = '';
