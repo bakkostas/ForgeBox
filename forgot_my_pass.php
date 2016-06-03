@@ -62,9 +62,10 @@ else{
 <script>
 
 $('#btnsubmit').click(function(){
-		$("#notification_msg").html("");
 		alert('11');
-		var formData = $('#email').value;
+		$("#notification_msg").html("");
+		
+		var formData = $('#email').val();
 			
 			alert(formData);
 			
