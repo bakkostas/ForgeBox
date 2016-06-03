@@ -5,9 +5,9 @@
 	include "session.php";
 	
 
-	if(isset($_POST['email']))
+	if(isset($_POST['mail']))
 	{
-		if(!empty($_POST['email'])){
+		if(!empty($_POST['mail'])){
 			
 			
 			$query_select_uid = "SELECT user_id FROM tbl_users WHERE email_user='".$_POST['mail']."' AND password_user='".$_POST['actnum']."'";
