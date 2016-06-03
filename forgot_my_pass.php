@@ -85,7 +85,7 @@ $('#btnsubmit').click(function(){
 				
 				}						
 			});
-		}
+		
 		}else{			
 			$("#notification_msg").html("");
 			$("#notification_msg").append("<span style=\"color:red;\">Please fill a password!</span>");
