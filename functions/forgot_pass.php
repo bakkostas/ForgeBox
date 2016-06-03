@@ -25,7 +25,7 @@
 			if($uid > 0){
 				
 				$ative_number = generateRandomString(3);
-				
+				die(msg(1,$ative_number));
 				
 				$$query_update_uid = "UPDATE tbl_users SET active_user=".intval($ative_number)." WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
