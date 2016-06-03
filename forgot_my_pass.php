@@ -65,15 +65,16 @@ $('#btnsubmit').click(function(){
 		
 		$("#notification_msg").html("");
 		
-		
-		if($('#email').val() != ''){
+		var formData = '';
+		formData = $('#email').val();		
 			
-			var formData = "email="+$('#email').val();
-			alert(formData);
+		if(formData != ''){
+			
+			
 			$.ajax({
 				type: "POST",
 				url: "functions/forgot_my_pass.php",
-				data: formData,
+				data: "email="+$('#email').val(),
 				dataType: "json",
 				success: function(msg){
 					$("#notification_msg").html("");
