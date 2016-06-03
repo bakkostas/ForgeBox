@@ -7,9 +7,9 @@
 	
 	
 
-	if(isset($_POST['email']))
+	if(isset($_GET['email']))
 	{
-		if(!empty($_POST['email'])){
+		if(!empty($_GET['email'])){
 			
 			
 			die(msg(1,"ok"));
