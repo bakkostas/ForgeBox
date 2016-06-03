@@ -246,7 +246,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					
 					if (oldpass == null || oldpass == "") {
 						
-						$("#notificatio_msg").append("");
+						$("#notificatio_msg").html("");
 						$("#notificatio_msg").append("<span style=\"color:red;\">Password must be filled out</span>");
 						
 						//JQuery.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Password must be filled out",	timeout: 5000});
