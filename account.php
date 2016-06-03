@@ -238,7 +238,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 		
 			alert('sdfsd');
 			
-			/*
+			
 			var oldpass = $('#oldpass').val();
 			var newpass = $('#newpass').val();
 			var newpass2 = $('#newpass2').val();
@@ -357,7 +357,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 		
 		
 		
-		
+		/*
 		
 		
 		
