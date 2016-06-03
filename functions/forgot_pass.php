@@ -37,7 +37,7 @@
 				
 				$to = $_POST['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
-				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_POST['email']."\">Click here to change your password!</a> ";
+				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\fb\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_POST['email']."\">Click here to change your password!</a> ";
 				$headers = "From: \n".$myemail;
 				$headers .= "Reply-To: ".$to;
 				
