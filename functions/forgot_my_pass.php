@@ -5,21 +5,13 @@
 	include "session.php";
 	
 	
-	function generateRandomString($length = 10) {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$charactersLength = strlen($characters);
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, $charactersLength - 1)];
-		}
-		return $randomString;
-	}
+	
 
-	if(isset($_POST['email']))
+	if(isset($_GET['email']))
 	{
-		if(!empty($_POST['email'])){
+		if(!empty($_GET['email'])){
 			
-			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_POST['email'];
+			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_GET['email'];
 			$result_select_uid = $connection->query($query_select_uid);
 			$uid =0;
 			while($row = $result_select_uid->fetch_array())
@@ -35,11 +27,11 @@
 				
 				$myemail = "info@forgebox.eu";
 				
-				$to = $_POST['email'];
+				$to = $_GET['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
-				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_POST['email']."\">Click here to change your password!</a> ";
+				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_GET['email']."\">Click here to change your password!</a> ";
 				$headers = "From: $myemail\n";
-				$headers .= "Reply-To: $_POST['email']";
+				$headers .= "Reply-To: $_GET['email']";
 				mail($to,$email_subject,$email_body,$headers);
 				
 				die(msg(1,"You have an email in your mail account. Please follow the instuctions!"));
@@ -59,5 +51,16 @@
 	{
 		return '{"status":'.$status.',"txt":"'.$txt.'"}';
 	}
+	
+	function generateRandomString($length = 10) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+	
 	
 ?>
