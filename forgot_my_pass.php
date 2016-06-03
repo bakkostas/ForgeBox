@@ -52,7 +52,7 @@ else{
 		<input type="email" id="email" placeholder="" class="form-control" value="<?php echo $uemail; ?>" name="email" />
 		<label for="email" class="error"></label>
 	</div>															
-	<div class="row">			
+	<div class="row" style="padding:30px;">			
 		<p id="notification_msg"></p>
 		<input type="submit" id="btnsubmit" onclick="return false;" value="Submit">
 	</div>		
@@ -70,7 +70,7 @@ $('#btnsubmit').click(function(){
 			alert(formData);
 			
 			
-		if($('#email').val() == ''){
+		if($('#email').val() != ''){
 			
 			var formData = $('#email').val();
 			
