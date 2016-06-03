@@ -2,10 +2,7 @@
 
 	
 	include "conf.php";
-	//include "session.php";
 	
-	
-
 	if(isset($_POST['email']))
 	{
 		if(!empty($_POST['email'])){

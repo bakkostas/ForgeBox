@@ -45,6 +45,8 @@ if(isset($_GET["actnum"]) && isset($_GET["mail"])){
 else{
 	
 ?>
+
+<form method="post" action="" name="change_password">
 	<div class="row" style="padding:30px;">
 		<h3>Give your login email!</h3>
 		<label for="email">E-mail</label>
@@ -54,7 +56,8 @@ else{
 	<div class="row" style="padding:30px;">			
 		<p id="notification_msg"></p>
 		<input type="submit" id="btnsubmit" onclick="return false;" value="Submit">
-	</div>		
+	</div>	
+</form>	
 <?php
 }
 ?>
