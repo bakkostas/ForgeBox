@@ -20,7 +20,7 @@
 			if($uid>0){
 				
 				
-				$$query_update_uid = "UPDATE tbl_users SET password_user='".$_POST['newpass']."' WHERE id_user=".$uid;
+				$query_update_uid = "UPDATE tbl_users SET password_user='".$_POST['newpass']."' WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
 
 				
