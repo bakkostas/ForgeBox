@@ -183,16 +183,11 @@ else{
 				success: function(msg){				
 						//	hideshow('loading',0);	
 						
-					var status = msg.status;
-					console.log(msg);
-					if(status == '0' ){		
+					
 						$("#notificatio_msg").html("");
 						$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 						
-					}else{				
-						$("#notificatio_msg").html("");
-						$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
-					}
+					
 							
 				}							
 			});
