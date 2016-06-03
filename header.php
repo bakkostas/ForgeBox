@@ -135,6 +135,10 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/rating.min.css">
 	
+	
+	 <script src="js/notify.js"></script>
+	 
+	 
 	<style type="text/css">
 		.black, .black a {
 		  color: #000;
