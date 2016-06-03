@@ -180,7 +180,7 @@ else{
 				data: formChPass,
 				dataType: "json",
 				success: function(msg){				
-						alert(msg.txt);
+						
 						$("#notificatio_msg").html("");
 						$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 						
