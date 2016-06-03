@@ -9,6 +9,7 @@
 	{
 		if(!empty($_POST['email'])){
 			
+			die(msg(1,"OK"));
 			$query_select_uid = "SELECT user_id FROM tbl_users WHERE email_user='".$_POST['mail']."' AND password_user='".$_POST['actnum']."'";
 			$result_select_uid = $connection->query($query_select_uid);
 			$uid =0;
