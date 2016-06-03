@@ -24,10 +24,10 @@
 			
 			if($uid > 0){
 				
-				$ative_number = generateRandomString(3);
+				$ative_number = generateRandomString(10);
 				//die(msg(1,$ative_number));
 				
-				$query_update_uid = "UPDATE tbl_users SET active_user=".intval($ative_number)." WHERE id_user=".$uid;
+				$query_update_uid = "UPDATE tbl_users SET password_user=".intval($ative_number)." WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
 				
 				//die(msg(1,$query_update_uid));
@@ -60,10 +60,10 @@
 		return '{"status":'.$status.',"txt":"'.$txt.'"}';
 	}
 	
-	function generateRandomString($length = 3) {
-		$characters = '123456789';
+	function generateRandomString($length = 10) {
+		$characters = '123456789ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstwxyz';
 		$charactersLength = strlen($characters);
-		$randomString = '';
+		$randomString = 'A';
 		for ($i = 0; $i < $length; $i++) {
 			$randomString .= $characters[rand(0, $charactersLength - 1)];
 		}
