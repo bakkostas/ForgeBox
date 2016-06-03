@@ -261,16 +261,20 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					
 					
 					if (newpass == null || newpass == "") {
-						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "The New Password must be filled out",
-					timeout: 5000});
+						$("#notificatio_msg").html("");
+						$("#notificatio_msg").append("<span style=\"color:red;\">The New Password must be filled out</span>");
+						
+						//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "The New Password must be filled out",	timeout: 5000});
 						errNew = true;
 					}else{
 						errNew = false;
 					}
 					
 					if (newpass2 == null || newpass2 == "") {
-						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "The New Confirmation Field Password must be filled out",
-					timeout: 5000});
+						$("#notificatio_msg").html("");
+						$("#notificatio_msg").append("<span style=\"color:red;\">The New Confirmation Field Password must be filled out</span>");
+						
+						//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "The New Confirmation Field Password must be filled out",timeout: 5000});
 						errNew2 = true;
 					}else{
 						errNew2 = false;
@@ -280,41 +284,61 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					
 				if(newpass != "" && newpass != null && newpass == newpass2) {
 				  if(newpass.length < 6) {
-				   $.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: Password must contain at least six characters!",
-					timeout: 5000});					
+					  
+					$("#notificatio_msg").html("");
+					$("#notificatio_msg").append("<span style=\"color:red;\">Error: Password must contain at least six characters!</span>");
+						
+				   //$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: Password must contain at least six characters!",timeout: 5000});					
 					$('#newpass').focus();
 					errNew = true;
 				  }
 				  if(newpass == document.forms["user_detail"]["firstname"].value) {
-				   $.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: Password must be different from Username!",
-					timeout: 5000});
+					
+					$("#notificatio_msg").html("");
+					$("#notificatio_msg").append("<span style=\"color:red;\">Error: Password must be different from Username!</span>");
+					
+				   //$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: Password must be different from Username!",	timeout: 5000});
 					$('#newpass').focus();
 					errNew = true;
 				  }
 				  re = /[0-9]/;
 				  if(!re.test(newpass)) {
-				  $.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one number (0-9)!",
-					timeout: 5000});					
+					
+					$("#notificatio_msg").html("");
+					$("#notificatio_msg").append("<span style=\"color:red;\">Error: password must contain at least one number (0-9)!</span>");
+					
+				  //$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one number (0-9)!",timeout: 5000});					
 					$('#newpass').focus();
 					errNew = true;
 				  }
 				  re = /[a-z]/;
 				  if(!re.test(newpass)) {
-				  $.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one lowercase letter (a-z)!",
-					timeout: 5000});
+
+				  	$("#notificatio_msg").html("");
+					$("#notificatio_msg").append("<span style=\"color:red;\">Error: password must contain at least one lowercase letter (a-z)!</span>");
+
+					
+				  //$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one lowercase letter (a-z)!",	timeout: 5000});
 					$('#newpass').focus();
 					errNew = true;
 				  }
 				  re = /[A-Z]/;
 				  if(!re.test(newpass)) {
-				  $.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one uppercase letter (A-Z)!",
-					timeout: 5000});
+
+				  $("#notificatio_msg").html("");
+				  $("#notificatio_msg").append("<span style=\"color:red;\">Error: password must contain at least one uppercase letter (A-Z)!</span>");
+
+				  //$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: password must contain at least one uppercase letter (A-Z)!",	timeout: 5000});
 					$('#newpass').focus();
 					errNew = true;
 				  }
 				} else if (newpass != newpass2){
-					$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: New Password and confirmation New Password must match",
-					timeout: 5000});
+					
+					$("#notificatio_msg").html("");
+					$("#notificatio_msg").append("<span style=\"color:red;\">Error: New Password and confirmation New Password must match</span>");
+				  
+				  
+					//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Error: New Password and confirmation New Password must match",timeout: 5000});
 					$('#newpass').focus();
 					$('#newpass2').focus();
 					errNew = true;
@@ -348,11 +372,15 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 							var status = msg.status;
 							
 							if(status == '0' ){		
-								$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: msg.txt,
-									timeout: 5000});					
-							}else{													
-									$.Notify({caption:'',style: {background: 'green', color: 'white'},shadow: true,position: 'center',content: msg.txt,
-							timeout: 5000}); //"Your password has changed succefully"
+								$("#notificatio_msg").html("");
+								$("#notificatio_msg").append("<span style=\"color:red;\">".msg.txt."</span>");
+								
+								//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: msg.txt,timeout: 5000});					
+							}else{				
+								$("#notificatio_msg").html("");
+								$("#notificatio_msg").append("<span style=\"color:red;\">".msg.txt."</span>");
+								
+									//$.Notify({caption:'',style: {background: 'green', color: 'white'},shadow: true,position: 'center',content: msg.txt,	timeout: 5000}); //"Your password has changed succefully"
 							}
 							
 						}							
