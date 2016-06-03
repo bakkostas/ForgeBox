@@ -37,7 +37,7 @@
 				
 				$to = $_POST['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
-				$email_body = '\n Folow the link to change your password! \n <a href="http://www.forgebox.eu/fb/forgot_my_pass.php?actnum='.$updPass.'&mail='.$_POST['email'].'">Click here to change your password!</a> ';
+				$email_body = 'Hi,<br /> Folow the link to change your password! <br /> <a href="http://www.forgebox.eu/fb/forgot_my_pass.php?actnum='.$updPass.'&mail='.$_POST['email'].'">Click here to change your password!</a> ';
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				$headers .= "From: \n".$myemail;
