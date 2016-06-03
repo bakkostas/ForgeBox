@@ -121,6 +121,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 								<input type="password" class="form-control" placeholder="" value="" id ="newpass2" name="newpass2" />
 							</div>
 							</br>
+							<p id="notificatio_msg"></p>
 							<br />
 							<input type="submit" id="uChPassSbmt" onclick="return false;" value="Change">
 							<input type="reset" value="Reset">
@@ -244,8 +245,9 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 				//Password validator
 					
 					if (oldpass == null || oldpass == "") {
-						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Password must be filled out",
-					timeout: 5000});
+						//$("#notificatio_msg").html("<span style=\"color:red;\">Password must be filled out</span>");
+						
+						$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "Password must be filled out",	timeout: 5000});
 						//return false;
 						errOld = true;
 					}
