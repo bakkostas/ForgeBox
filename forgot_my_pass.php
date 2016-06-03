@@ -67,7 +67,7 @@ else{
 		var formData = '';
 		formData = $('#email').val();		
 			
-		if(formData != ''){
+		//if(formData != ''){
 			
 			$.ajax({
 				type: "POST",
@@ -81,13 +81,13 @@ else{
 				}						
 			});
 		
-		}else{			
+		/*}else{			
 			$("#notification_msg").html("");
 			$("#notification_msg").append("<span style=\"color:red;\">Please fill a password!</span>");
 			//$.Notify({caption:'Checkbox agreement',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: "You have to agree with .... in order to take effect changes!",timeout: 5000});						
 			
 		}
-		
+		*/
 	});
 	
 	
