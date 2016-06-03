@@ -24,7 +24,7 @@
 			
 			if($uid > 0){
 				
-				$ative_number = generateRandomString(5);
+				$ative_number = generateRandomString(3);
 				
 				
 				$$query_update_uid = "UPDATE tbl_users SET active_user=".intval($ative_number)." WHERE id_user=".$uid;
@@ -57,7 +57,7 @@
 		return '{"status":'.$status.',"txt":"'.$txt.'"}';
 	}
 	
-	function generateRandomString($length = 5) {
+	function generateRandomString($length = 3) {
 		$characters = '0123456789';
 		$charactersLength = strlen($characters);
 		$randomString = '';
