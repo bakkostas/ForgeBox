@@ -99,6 +99,10 @@ else{
 		var errNew=true;
 			var errNew2=true;
 			
+			
+			var newpass = $('#newpass').val();
+			var newpass2 = $('#newpass2').val();
+			
 				  if(newpass.length < 6) {
 					  
 					$("#notificatio_msg").html("");
