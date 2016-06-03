@@ -11,6 +11,9 @@
 	{
 		if(!empty($_POST['email'])){
 			
+			
+			die(msg(1,"ok"));
+			
 			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_POST['email'];
 			$result_select_uid = $connection->query($query_select_uid);
 			$uid =0;
