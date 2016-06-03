@@ -1,6 +1,5 @@
 <?php
-	include 'header.php'; 
-	$lrs_object_name = "My Account";
+	include 'header.php'; 	
 ?>
 
 <?php
@@ -61,7 +60,7 @@ else{
 ?>
 <script>
 
-$('#btnsubmit').click(function(){
+	$('#btnsubmit').click(function(){
 		
 		$("#notification_msg").html("");
 		
