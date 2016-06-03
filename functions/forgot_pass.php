@@ -10,18 +10,19 @@
 			
 			$uid =0;
 			
-			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user='".$_POST['email']."'";
+			$query_select_uid = "SELECT id_user FROM tbl_users WHERE email_user='".$_POST['email']."'";
 			$result_select_uid = $connection->query($query_select_uid);
-			$obj = mysqli_fetch_object($result_select_uid);
+			
+			/*$obj = mysqli_fetch_object($result_select_uid);
 			$uid = $result_select_uid->num_rows;
-		
-			/*$uid =0;
+		*/
+			
 			while($row = $result_select_uid->fetch_array())
 			{
 				$uid = $row[0];
 			}
-			*/
-			if($uid>0){
+			
+			if($uid > 0){
 				
 				$ative_number = generateRandomString(20);
 				$$query_update_uid = "UPDATE tbl_users SET active_user=".$ative_number." WHERE id_user=".$uid;
