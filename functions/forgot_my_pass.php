@@ -5,14 +5,14 @@
 	include "session.php";
 	
 	
-	
+	die(msg(1,"ok"));
 
 	if(isset($_GET['email']))
 	{
 		if(!empty($_GET['email'])){
 			
 			
-			die(msg(1,"ok"));
+			
 			
 			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_POST['email'];
 			$result_select_uid = $connection->query($query_select_uid);
