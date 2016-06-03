@@ -370,7 +370,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 						//	hideshow('loading',0);	
 						
 							var status = msg.status;
-							
+							console.log(msg);
 							if(status == '0' ){		
 								$("#notificatio_msg").html("");
 								$("#notificatio_msg").append("<span style=\"color:red;\">".msg.txt."</span>");
