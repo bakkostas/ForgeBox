@@ -27,8 +27,8 @@
 					<br />	
 					</div>
 					</div>
-					<div class="row">
-						<a href="forgot_my_pass.php">Forgot my password!</a>
+					<div class="row" style="padding-bottom:20px;padding-left:15px;">
+						<a href="forgot_my_pass.php" style="color:#FFFFFF; text-decoration: none;">Forgot my password!</a>
 					</div>
 					<div class="row" >
 						 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >

@@ -46,7 +46,8 @@ if(isset($_GET["actnum"]) && isset($_GET["mail"])){
 else{
 	
 ?>
-	<div class="row">
+	<div class="row" style="padding:30px;">
+		<h3>Give your login email!</h3>
 		<label for="email">E-mail</label>
 		<input type="email" id="email" placeholder="" class="form-control" value="<?php echo $uemail; ?>" name="email" />
 		<label for="email" class="error"></label>
@@ -72,7 +73,7 @@ $('#btnsubmit').click(function(){
 				data: formData,
 				success: function(msg){
 					$("#notification_msg").html("");
-					$("#notification_msg").append("<span style=\"color:green;\">User details updated!</span>");
+					$("#notification_msg").append("<span style=\"color:green;\">"+msg.txt+"</span>");
 				
 				}						
 			});
