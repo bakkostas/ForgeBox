@@ -33,7 +33,7 @@
 				//die(msg(1,$query_update_uid));
 				
 				
-				$myemail = "Forgebox.eu - <info@forgebox.eu>";
+				$myemail = "<info@forgebox.eu>";
 				
 				
 				$to = $_POST['email'];
