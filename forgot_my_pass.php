@@ -161,7 +161,7 @@ else{
 		if((!errNew)&&(!errNew2)){
 			
 			var formChPass = "newpass="+newpass+"&actnum=<?php echo $_GET["actnum"]; ?>&mail=<?php echo $_GET["mail"]; ?>";
-					
+			alert(formChPass);
 			$.ajax({
 				type: "POST",
 				url: "functions/update_forgotten_pass,php",
