@@ -136,7 +136,6 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
     <link rel="stylesheet" href="css/rating.min.css">
 	
 	
-	 <script src="js/notify.js"></script>
 	 
 	 
 	<style type="text/css">
