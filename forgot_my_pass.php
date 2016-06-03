@@ -62,19 +62,13 @@ else{
 <script>
 
 $('#btnsubmit').click(function(){
-		alert('11');
+		
 		$("#notification_msg").html("");
 		
-		var formData = $('#email').val();
-			
-			alert(formData);
-			
-			
+		
 		if($('#email').val() != ''){
 			
-			var formData = $('#email').val();
-			
-			alert(formData);
+			var formData = "email="+$('#email').val();
 			
 			$.ajax({
 				type: "POST",
