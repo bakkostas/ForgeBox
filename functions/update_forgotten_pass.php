@@ -4,7 +4,6 @@
 	include "conf.php";
 	
 	
-	die(msg(1,"dfg"));
 	
 	if(isset($_POST['mail']))
 	{
