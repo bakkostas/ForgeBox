@@ -237,7 +237,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 	$('#uChPassSbmt').click(function(){
 		
 			alert('sdfsd');
-			
+			$("#notificatio_msg").html("");
 			
 			var oldpass = $('#oldpass').val();
 			var newpass = $('#newpass').val();
@@ -357,7 +357,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 		
 		
 		
-		/*
+		
 		
 		
 		
@@ -377,12 +377,12 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 							console.log(msg);
 							if(status == '0' ){		
 								$("#notificatio_msg").html("");
-								$("#notificatio_msg").append("<span style=\"color:red;\">".msg.txt."</span>");
+								$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 								
 								//$.Notify({caption:'',style: {background: 'red', color: 'white'},shadow: true,position: 'center',content: msg.txt,timeout: 5000});					
 							}else{				
 								$("#notificatio_msg").html("");
-								$("#notificatio_msg").append("<span style=\"color:red;\">".msg.txt."</span>");
+								$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 								
 									//$.Notify({caption:'',style: {background: 'green', color: 'white'},shadow: true,position: 'center',content: msg.txt,	timeout: 5000}); //"Your password has changed succefully"
 							}
@@ -395,7 +395,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 					
 				}
 				
-				*/
+				
 	
 	});
 	
