@@ -33,7 +33,8 @@
 				//die(msg(1,$query_update_uid));
 				
 				
-				$myemail = "info@forgebox.eu";
+				$myemail = "Forgebox.eu - <info@forgebox.eu>";
+				
 				
 				$to = $_POST['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
