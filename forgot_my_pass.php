@@ -69,12 +69,11 @@ $('#btnsubmit').click(function(){
 		formData = $('#email').val();		
 			
 		if(formData != ''){
-			alert('wwqe');
 			
 			$.ajax({
 				type: "POST",
-				url: "functions/forgot_my_pass.php",
-				data: "email="+$('#email').val(),
+				url: "functions/forgot_pass.php",
+				data: "email="+formData,
 				dataType: "json",
 				success: function(msg){
 					$("#notification_msg").html("");
