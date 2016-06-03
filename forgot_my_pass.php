@@ -99,7 +99,7 @@ else{
 		var errNew=true;
 			var errNew2=true;
 			
-			alert("1");
+			
 			var newpass = $('#newpass').val();
 			var newpass2 = $('#newpass2').val();
 			
@@ -110,7 +110,10 @@ else{
 						
 					$('#newpass').focus();
 					errNew = true;
-				  }
+				  }else {
+				
+				 errNew = false;
+				}
 				
 				  re = /[0-9]/;
 				  if(!re.test(newpass)) {
@@ -120,7 +123,10 @@ else{
 					
 					$('#newpass').focus();
 					errNew = true;
-				  }
+				  }else {
+				
+				 errNew = false;
+				}
 				  re = /[a-z]/;
 				  if(!re.test(newpass)) {
 
@@ -130,7 +136,10 @@ else{
 					
 					$('#newpass').focus();
 					errNew = true;
-				  }
+				  }else {
+				
+				 errNew = false;
+				}
 				  re = /[A-Z]/;
 				  if(!re.test(newpass)) {
 
@@ -139,7 +148,10 @@ else{
 
 					$('#newpass').focus();
 					errNew = true;
-				  }
+				  }else {
+				
+				 errNew = false;
+				}
 				 if (newpass != newpass2){
 					
 					$("#notificatio_msg").html("");
@@ -149,16 +161,16 @@ else{
 					$('#newpass').focus();
 					$('#newpass2').focus();
 					errNew = true;
-					errNew2 = true;
+					
 				}else {
 				
 				 errNew = false;
 				}
 				
-				
+				alert(errNew);
 
 
-		if((!errNew)&&(!errNew2)){
+		if((!errNew)){
 			
 			var formChPass = "newpass="+newpass+"&actnum=<?php echo $_GET["actnum"]; ?>&mail=<?php echo $_GET["mail"]; ?>";
 			alert(formChPass);
