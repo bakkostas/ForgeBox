@@ -7,11 +7,11 @@
 	
 	
 
-	if(isset($_GET['email']))
+	if(isset($_POST['email']))
 	{
-		if(!empty($_GET['email'])){
+		if(!empty($_POST['email'])){
 			
-			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_GET['email'];
+			$query_select_uid = "SELECT id FROM tbl_users WHERE email_user=".$_POST['email'];
 			$result_select_uid = $connection->query($query_select_uid);
 			$uid =0;
 			while($row = $result_select_uid->fetch_array())
@@ -27,11 +27,11 @@
 				
 				$myemail = "info@forgebox.eu";
 				
-				$to = $_GET['email'];
+				$to = $_POST['email'];
 				$email_subject = $InstallationSite." Forgot Password ";
-				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_GET['email']."\">Click here to change your password!</a> ";
+				$email_body = "\n Folow the link to change your password! \n <a href=\"www.forgebox.eu\staging\forgot_my_pass.php?actnum=".$ative_number."&mail=".$_POST['email']."\">Click here to change your password!</a> ";
 				$headers = "From: $myemail\n";
-				$headers .= "Reply-To: $_GET['email']";
+				$headers .= "Reply-To: $_POST['email']";
 				mail($to,$email_subject,$email_body,$headers);
 				
 				die(msg(1,"You have an email in your mail account. Please follow the instuctions!"));
