@@ -26,8 +26,8 @@
 				
 				$ative_number = generateRandomString(10);
 				//die(msg(1,$ative_number));
-				
-				$query_update_uid = "UPDATE tbl_users SET password_user='".$ative_number."' WHERE id_user=".$uid;
+				$updPass = md5($ative_number);
+				$query_update_uid = "UPDATE tbl_users SET password_user='".$updPass."' WHERE id_user=".$uid;
 				$result_update_uid = $connection->query($query_update_uid);
 				
 				//die(msg(1,$query_update_uid));
