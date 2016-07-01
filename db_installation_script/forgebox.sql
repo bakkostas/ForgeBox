@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Δομή πίνακα για τον πίνακα `actions`
 --
 
+DROP TABLE IF EXISTS `actions`;
 CREATE TABLE IF NOT EXISTS `actions` (
   `key_name` varchar(50) NOT NULL,
   `display_name` varchar(100) NOT NULL,
@@ -49,6 +50,7 @@ INSERT INTO `actions` (`key_name`, `display_name`, `category_id`) VALUES
 ('INSTALL_COURSE_FROM_FORGESTORE', 'Install Course from Forgestore', 1),
 ('INSTALL_SERVICES', 'Install Services', 3),
 ('INSTALL_WIDGETS', 'Install Widgets', 2),
+('LRS_CONFIGURATION', 'LRS Configuration', 4),
 ('MY_ACCOUNT', 'My Account', 5),
 ('MY_DASHBOARD', 'My Dashboard', 5),
 ('NEW_EDIT_DELETE_CATEGORY_COURSE', 'New/Edit/Delete Category Course', 1),
@@ -74,7 +76,8 @@ INSERT INTO `actions` (`key_name`, `display_name`, `category_id`) VALUES
 ('VIEW_MY_COURSES', 'View My Courses', 1),
 ('VIEW_MY_SERVICES', 'View My Services', 3),
 ('VIEW_MY_WIDGET', 'View My Widget', 2),
-('VIEW_PRESENTATION', 'View Presentation', 1);
+('VIEW_PRESENTATION', 'View Presentation', 1),
+('VIEW_WIDGETS', 'View Widget', 2);
 
 -- --------------------------------------------------------
 
@@ -82,6 +85,7 @@ INSERT INTO `actions` (`key_name`, `display_name`, `category_id`) VALUES
 -- Δομή πίνακα για τον πίνακα `category_actions`
 --
 
+DROP TABLE IF EXISTS `category_actions`;
 CREATE TABLE IF NOT EXISTS `category_actions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -102,9 +106,45 @@ INSERT INTO `category_actions` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `match_action_role`
+-- Δομή πίνακα για τον πίνακα `course_rating`
 --
 
+DROP TABLE IF EXISTS `course_rating`;
+CREATE TABLE IF NOT EXISTS `course_rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `score_val` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `lrs_details`
+--
+
+DROP TABLE IF EXISTS `lrs_details`;
+CREATE TABLE IF NOT EXISTS `lrs_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `lrs_name` varchar(250) NOT NULL,
+  `endpoint_url` varchar(250) NOT NULL,
+  `username` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `match_action_role`
+--
+DROP TABLE IF EXISTS `match_action_role`;
 CREATE TABLE IF NOT EXISTS `match_action_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_role` int(11) NOT NULL,
@@ -148,14 +188,88 @@ INSERT INTO `match_action_role` (`id`, `id_role`, `action`) VALUES
 (64, 1, 'NEW_EDIT_DELETE_SERVICES'),
 (65, 1, 'NOTIFICATIONS'),
 (66, 1, 'PREVIEW_COURSE'),
-(67, 1, 'REVIEWS');
+(67, 1, 'REVIEWS'),
+(68, 6, 'MY_ACCOUNT'),
+(70, 6, 'PREVIEW_COURSE'),
+(71, 6, 'EPUB_EXPORT_COURSE'),
+(72, 2, 'VIEW_PRESENTATION'),
+(74, 2, 'PREVIEW_COURSE'),
+(75, 2, 'VIEW_COURSE_SUPPORT_SERVICES'),
+(76, 2, 'VIEW_INTERACTIVE_COURSE'),
+(77, 2, 'NEW_EDIT_DELETE_PRESENTATION_COURSE'),
+(78, 2, 'NEW_EDIT_DELETE_INTERACTIVE_COURSE'),
+(79, 2, 'NEW_EDIT_DELETE_CATEGORY_COURSE'),
+(80, 2, 'VIEW_CATEGORY_COURSE'),
+(81, 2, 'NEW_EDIT_DELETE_COURSE'),
+(82, 2, 'EPUB_EXPORT_COURSE'),
+(83, 2, 'ADD_DELETE_ORDER_COURSE_PART'),
+(84, 2, 'INSTALL_COURSE_FROM_FORGESTORE'),
+(85, 4, 'VIEW_CATEGORY_WIDGET'),
+(86, 4, 'INSTALLED_MY_WIDGET'),
+(87, 4, 'VIEW_MY_WIDGET'),
+(88, 4, 'INSTALL_WIDGETS'),
+(89, 4, 'DELETE_MY_WIDGET'),
+(90, 4, 'PUBLISH_TO_STORE_WIDGET'),
+(91, 4, 'DELETE_INSTALLED_WIDGET'),
+(92, 4, 'NEW_EDIT_DELETE_WIDGET'),
+(93, 4, 'NEW_EDIT_DELETE_WIDGET_CATEGORY'),
+(94, 5, 'VIEW_PRESENTATION'),
+(96, 5, 'PREVIEW_COURSE'),
+(97, 5, 'VIEW_COURSE_SUPPORT_SERVICES'),
+(98, 5, 'VIEW_INTERACTIVE_COURSE'),
+(100, 5, 'EPUB_EXPORT_COURSE'),
+(101, 5, 'INSTALL_COURSE_FROM_FORGESTORE'),
+(102, 3, 'DELETE_MY_SERVICES'),
+(103, 3, 'NEW_EDIT_DELETE_SERVICE_CATEGORY'),
+(104, 3, 'NEW_EDIT_DELETE_SERVICES'),
+(107, 3, 'INSTALL_SERVICES'),
+(108, 2, 'INSTALL_SERVICES'),
+(109, 2, 'INSTALL_WIDGETS'),
+(110, 2, 'VIEW_MY_WIDGET'),
+(111, 2, 'INSTALLED_MY_WIDGET'),
+(112, 2, 'MY_DASHBOARD'),
+(113, 3, 'MY_DASHBOARD'),
+(114, 4, 'MY_DASHBOARD'),
+(115, 5, 'MY_DASHBOARD'),
+(116, 2, 'MY_ACCOUNT'),
+(117, 3, 'MY_ACCOUNT'),
+(118, 4, 'MY_ACCOUNT'),
+(119, 5, 'MY_ACCOUNT'),
+(120, 1, 'VIEW_ALL_COURSES'),
+(121, 1, 'VIEW_MY_COURSES'),
+(122, 7, 'VIEW_ALL_COURSES'),
+(123, 2, 'VIEW_ALL_COURSES'),
+(124, 6, 'VIEW_ALL_COURSES'),
+(125, 3, 'VIEW_ALL_COURSES'),
+(126, 4, 'VIEW_ALL_COURSES'),
+(127, 5, 'VIEW_ALL_COURSES'),
+(129, 2, 'VIEW_MY_COURSES'),
+(130, 1, 'SITE_CONFIGURATION'),
+(131, 1, 'LRS_CONFIGURATION'),
+(132, 1, 'VIEW_WIDGETS'),
+(133, 2, 'VIEW_WIDGETS'),
+(134, 4, 'VIEW_WIDGETS');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `match_course_lrs`
+--
+
+DROP TABLE IF EXISTS `match_course_lrs`;
+CREATE TABLE IF NOT EXISTS `match_course_lrs` (
+  `course_id` int(11) NOT NULL,
+  `lrs_id` int(11) NOT NULL,
+  UNIQUE KEY `course_id` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
 --
 -- Δομή πίνακα για τον πίνακα `store_scorm_epub`
 --
-
+DROP TABLE IF EXISTS `store_scorm_epub`;
 CREATE TABLE IF NOT EXISTS `store_scorm_epub` (
   `course_id` int(11) NOT NULL,
   `has_scorm` tinyint(4) NOT NULL,
@@ -164,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `store_scorm_epub` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
+DROP TABLE IF EXISTS `tbl_category_courses`;
 CREATE TABLE IF NOT EXISTS `tbl_category_courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
@@ -177,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `tbl_category_courses` (
 --
 -- Δομή πίνακα για τον πίνακα `tbl_category_widget`
 --
-
+DROP TABLE IF EXISTS `tbl_category_widget`;
 CREATE TABLE IF NOT EXISTS `tbl_category_widget` (
   `id_category_widget` int(11) NOT NULL AUTO_INCREMENT,
   `name_category_widget` varchar(50) NOT NULL,
@@ -191,6 +305,7 @@ CREATE TABLE IF NOT EXISTS `tbl_category_widget` (
 -- Δομή πίνακα για τον πίνακα `tbl_courses`
 --
 
+DROP TABLE IF EXISTS `tbl_courses`;
 CREATE TABLE IF NOT EXISTS `tbl_courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL,
@@ -224,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `tbl_courses` (
   `interactive_category` int(11) DEFAULT NULL,
   `interactive_item` int(11) DEFAULT NULL,
   `interactive_url` varchar(250) DEFAULT NULL,
+  `iframe_height` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=117 ;
 
@@ -231,6 +347,7 @@ CREATE TABLE IF NOT EXISTS `tbl_courses` (
 -- Δομή πίνακα για τον πίνακα `tbl_course_types`
 --
 
+DROP TABLE IF EXISTS `tbl_course_types`;
 CREATE TABLE IF NOT EXISTS `tbl_course_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
@@ -253,6 +370,7 @@ INSERT INTO `tbl_course_types` (`id`, `name`, `active`) VALUES
 -- Δομή πίνακα για τον πίνακα `tbl_install_widget`
 --
 
+DROP TABLE IF EXISTS `tbl_install_widget`;
 CREATE TABLE IF NOT EXISTS `tbl_install_widget` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `widget_id` int(11) NOT NULL,
@@ -270,6 +388,7 @@ CREATE TABLE IF NOT EXISTS `tbl_install_widget` (
 -- Δομή πίνακα για τον πίνακα `tbl_match_course_category`
 --
 
+DROP TABLE IF EXISTS `tbl_match_course_category`;
 CREATE TABLE IF NOT EXISTS `tbl_match_course_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
@@ -282,6 +401,7 @@ CREATE TABLE IF NOT EXISTS `tbl_match_course_category` (
 -- Δομή πίνακα για τον πίνακα `tbl_match_present_interact_course`
 --
 
+DROP TABLE IF EXISTS `tbl_match_present_interact_course`;
 CREATE TABLE IF NOT EXISTS `tbl_match_present_interact_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
@@ -295,6 +415,7 @@ CREATE TABLE IF NOT EXISTS `tbl_match_present_interact_course` (
 -- Δομή πίνακα για τον πίνακα `tbl_repository`
 --
 
+DROP TABLE IF EXISTS `tbl_repository`;
 CREATE TABLE IF NOT EXISTS `tbl_repository` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -317,6 +438,7 @@ INSERT INTO `tbl_repository` (`id`, `name`, `active`, `url_json`, `url_images`) 
 -- Δομή πίνακα για τον πίνακα `tbl_role`
 --
 
+DROP TABLE IF EXISTS `tbl_role`;
 CREATE TABLE IF NOT EXISTS `tbl_role` (
   `id_role` int(11) NOT NULL AUTO_INCREMENT,
   `name_role` varchar(50) NOT NULL,
@@ -343,6 +465,7 @@ INSERT INTO `tbl_role` (`id_role`, `name_role`, `active_role`) VALUES
 -- Δομή πίνακα για τον πίνακα `tbl_support_services`
 --
 
+DROP TABLE IF EXISTS `tbl_support_services`;
 CREATE TABLE IF NOT EXISTS `tbl_support_services` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
@@ -354,6 +477,7 @@ CREATE TABLE IF NOT EXISTS `tbl_support_services` (
 -- Δομή πίνακα για τον πίνακα `tbl_users`
 --
 
+DROP TABLE IF EXISTS `tbl_users`;
 CREATE TABLE IF NOT EXISTS `tbl_users` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `name_user` varchar(50) NOT NULL,
@@ -381,6 +505,7 @@ INSERT INTO `tbl_users` (`id_user`, `name_user`, `surname_user`, `email_user`, `
 -- Δομή πίνακα για τον πίνακα `tbl_user_role`
 --
 
+DROP TABLE IF EXISTS `tbl_user_role`;
 CREATE TABLE IF NOT EXISTS `tbl_user_role` (
   `id_role_user` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
@@ -399,7 +524,7 @@ INSERT INTO `tbl_user_role` (`id_role_user`, `id_user`, `id_role`) VALUES
 -- Δομή πίνακα για τον πίνακα `tbl_widget_match_with_category`
 --
 
-
+DROP TABLE IF EXISTS `tbl_widget_match_with_category`;
 CREATE TABLE IF NOT EXISTS `tbl_widget_match_with_category` (
   `id_widget_match_with_category` int(11) NOT NULL AUTO_INCREMENT,
   `id_category_widget` int(11) NOT NULL,
@@ -413,6 +538,7 @@ CREATE TABLE IF NOT EXISTS `tbl_widget_match_with_category` (
 -- Δομή πίνακα για τον πίνακα `tbl_widget_meta_data`
 --
 
+DROP TABLE IF EXISTS `tbl_widget_meta_data`;
 CREATE TABLE IF NOT EXISTS `tbl_widget_meta_data` (
   `id_widget_meta_data` int(11) NOT NULL AUTO_INCREMENT,
   `url_widget_meta_data` text NOT NULL,
@@ -434,6 +560,7 @@ CREATE TABLE IF NOT EXISTS `tbl_widget_meta_data` (
 -- Δομή πίνακα για τον πίνακα `tbl_widget_screenshot`
 --
 
+DROP TABLE IF EXISTS `tbl_widget_screenshot`;
 CREATE TABLE IF NOT EXISTS `tbl_widget_screenshot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `widget_id` int(11) NOT NULL,
